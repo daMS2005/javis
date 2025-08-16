@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SΞNSΞ TRΛVΞL ΛGΞNCY - Luxury Villa Escapes for Students</title>
+    <meta name="description" content="Travel that makes sense. Luxury, rooted in culture. Designed by students, for students.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>SΞNSΞ</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#trips">Experiences</a></li>
+                <li><a href="#safety">Safety</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#ambassador">Ambassador</a></li>
+                <li><a href="#contact" class="cta-button">Join Waitlist</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="hero-image active" style="background-image: url('images/2.jpg')"></div>
+            <div class="hero-image" style="background-image: url('images/1.jpg')"></div>
+            <div class="hero-image" style="background-image: url('images/28.jpg')"></div>
+        </div>
+        <div class="hero-content">
+            <div class="container">
+                <h1 class="hero-title">Travel that makes sense.</h1>
+                <h2 class="hero-subtitle">Luxury, rooted in culture.</h2>
+                <p class="hero-tagline">Designed by students, for students.</p>
+                <div class="hero-cta">
+                    <a href="#trips" class="btn btn-primary">Explore Trips</a>
+                    <a href="#contact" class="btn btn-secondary">Join a Group</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">About SΞNSΞ</h2>
+                    <p class="section-subtitle">Student-founded, DR-rooted, purpose-driven</p>
+                    <p class="about-description">
+                        Born from the vision of students who believe travel should be both luxurious and meaningful, 
+                        SΞNSΞ TRΛVΞL ΛGΞNCY curates exceptional villa escapes that blend Caribbean culture with 
+                        boutique luxury. We understand what students want: authentic experiences, safety, and 
+                        unforgettable memories with peers.
+                    </p>
+                    <div class="brand-pillars">
+                        <div class="pillar">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4>Safety</h4>
+                        </div>
+                        <div class="pillar">
+                            <i class="fas fa-globe-americas"></i>
+                            <h4>Culture</h4>
+                        </div>
+                        <div class="pillar">
+                            <i class="fas fa-crown"></i>
+                            <h4>Luxury</h4>
+                        </div>
+                        <div class="pillar">
+                            <i class="fas fa-users"></i>
+                            <h4>Peer-built</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="images/23.jpg" alt="Santo Domingo scene">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiences Section -->
+    <section id="trips" class="trips">
+        <div class="container">
+            <h2 class="section-title">SΞNSΞ Experiences</h2>
+            <p class="section-subtitle">Discover the activities and adventures that await you in the Dominican Republic</p>
+            
+            <div class="trip-filters">
+                <button class="filter-btn active" data-filter="all">All Experiences</button>
+                <button class="filter-btn" data-filter="villa">Luxury Accommodations</button>
+                <button class="filter-btn" data-filter="beach">Water Activities</button>
+                <button class="filter-btn" data-filter="cultural">Cultural Immersion</button>
+                <button class="filter-btn" data-filter="nightlife">Entertainment</button>
+                <button class="filter-btn" data-filter="adventure">Adventure</button>
+                <button class="filter-btn" data-filter="luxury">Premium Services</button>
+            </div>
+
+            <div class="trips-grid">
+                <div class="trip-card" data-category="villa">
+                    <div class="trip-image">
+                        <img src="images/11.jpg" alt="Overwater Hut Resort">
+                        <div class="trip-overlay">
+                            <span class="trip-badge">Luxury</span>
+                        </div>
+                    </div>
+                    <div class="trip-content">
+                        <h3>Luxury Villa Experiences</h3>
+                        <p>Stay in exclusive overwater bungalows and luxury villas featuring private pools, swim-up bars, and premium resort amenities. Perfect for groups seeking privacy and comfort.</p>
+                        <div class="trip-features">
+                            <span><i class="fas fa-swimming-pool"></i> Private Pools</span>
+                            <span><i class="fas fa-umbrella-beach"></i> Beach Access</span>
+                            <span><i class="fas fa-users"></i> Group Accommodations</span>
+                        </div>
+                        <a href="#contact" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="trip-card" data-category="beach">
+                    <div class="trip-image">
+                        <img src="images/28.jpg" alt="Aerial Cenote">
+                        <div class="trip-overlay">
+                            <span class="trip-badge">Water</span>
+                        </div>
+                    </div>
+                    <div class="trip-content">
+                        <h3>Water Adventures & Activities</h3>
+                        <p>Explore pristine cenotes, hidden lagoons, and crystal-clear turquoise waters. Enjoy swimming, snorkeling, and water sports in secluded tropical settings.</p>
+                        <div class="trip-features">
+                            <span><i class="fas fa-umbrella-beach"></i> Beach Activities</span>
+                            <span><i class="fas fa-water"></i> Cenote Exploration</span>
+                            <span><i class="fas fa-fish"></i> Water Sports</span>
+                        </div>
+                        <a href="#contact" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="trip-card" data-category="cultural">
+                    <div class="trip-image">
+                        <img src="images/19.jpg" alt="Street Art Market">
+                        <div class="trip-overlay">
+                            <span class="trip-badge">Culture</span>
+                        </div>
+                    </div>
+                    <div class="trip-content">
+                        <h3>Cultural Immersion Activities</h3>
+                        <p>Immerse yourself in vibrant street markets, colorful art displays, and authentic Dominican experiences. Connect with local culture and traditions.</p>
+                        <div class="trip-features">
+                            <span><i class="fas fa-palette"></i> Local Art</span>
+                            <span><i class="fas fa-shopping-bag"></i> Street Markets</span>
+                            <span><i class="fas fa-flag"></i> Cultural Heritage</span>
+                        </div>
+                        <a href="#contact" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="trip-card" data-category="nightlife">
+                    <div class="trip-image">
+                        <img src="images/21.jpg" alt="Nightclub Celebration">
+                        <div class="trip-overlay">
+                            <span class="trip-badge">Entertainment</span>
+                        </div>
+                    </div>
+                    <div class="trip-content">
+                        <h3>Nightlife & Entertainment</h3>
+                        <p>Experience the electric energy of Dominican nightlife with exclusive access to the hottest clubs, champagne celebrations, and entertainment venues.</p>
+                        <div class="trip-features">
+                            <span><i class="fas fa-music"></i> Live Concerts</span>
+                            <span><i class="fas fa-glass-cheers"></i> VIP Access</span>
+                            <span><i class="fas fa-star"></i> Exclusive Events</span>
+                        </div>
+                        <a href="#contact" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="trip-card" data-category="adventure">
+                    <div class="trip-image">
+                        <img src="images/25.jpg" alt="Aerial Waterfall">
+                        <div class="trip-overlay">
+                            <span class="trip-badge">Adventure</span>
+                        </div>
+                    </div>
+                    <div class="trip-content">
+                        <h3>Adventure & Natural Wonders</h3>
+                        <p>Explore breathtaking waterfalls, hidden cenotes, and pristine natural landscapes. Perfect for adventure seekers and nature lovers.</p>
+                        <div class="trip-features">
+                            <span><i class="fas fa-mountain"></i> Waterfall Hikes</span>
+                            <span><i class="fas fa-water"></i> Cenote Diving</span>
+                            <span><i class="fas fa-tree"></i> Nature Exploration</span>
+                        </div>
+                        <a href="#contact" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="trip-card" data-category="luxury">
+                    <div class="trip-image">
+                        <img src="images/22.jpg" alt="Night Resort Pool">
+                        <div class="trip-overlay">
+                            <span class="trip-badge">Premium</span>
+                        </div>
+                    </div>
+                    <div class="trip-content">
+                        <h3>Premium Services & Amenities</h3>
+                        <p>Enjoy world-class service with exclusive amenities, overwater bungalows, and all-inclusive experiences in stunning tropical settings.</p>
+                        <div class="trip-features">
+                            <span><i class="fas fa-crown"></i> Premium Service</span>
+                            <span><i class="fas fa-concierge-bell"></i> All-Inclusive</span>
+                            <span><i class="fas fa-star"></i> Luxury Amenities</span>
+                        </div>
+                        <a href="#contact" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Section -->
+    <section id="safety" class="safety">
+        <div class="container">
+            <div class="safety-content">
+                <div class="safety-text">
+                    <h2 class="section-title">Your Safety, Our Priority</h2>
+                    <p class="safety-description">
+                        SΞNSΞ delivers exceptional travel experiences through strict safety protocols. 
+                        Destinations are chosen for the perfect blend of luxury, accessibility, and security.
+                    </p>
+                    <p class="safety-description">
+                        All trips include 24/7 medical staff, vetted on-site coordinators, and private 
+                        transportation. We partner only with reliable local providers and actively monitor 
+                        conditions, ensuring peace of mind while you create unforgettable memories.
+                    </p>
+                    <div class="safety-features">
+                        <div class="safety-feature">
+                            <i class="fas fa-user-md"></i>
+                            <span>24/7 Medical Staff</span>
+                        </div>
+                        <div class="safety-feature">
+                            <i class="fas fa-car"></i>
+                            <span>Private Transportation</span>
+                        </div>
+                        <div class="safety-feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Vetted Coordinators</span>
+                        </div>
+                        <div class="safety-feature">
+                            <i class="fas fa-eye"></i>
+                            <span>Active Monitoring</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="safety-image">
+                    <img src="images/8.jpg" alt="Safe travel experience">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="section-title">Real Trip Moments</h2>
+            <p class="section-subtitle">Villas, boat days, brunch, nightlife - captured by our travelers</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/6.jpg" alt="Resort Swimming Pool">
+                    <div class="gallery-overlay">
+                        <p>"Luxury resort pools with swim-up bars and tropical vegetation"</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/14.jpg" alt="Beach Resort Scene">
+                    <div class="gallery-overlay">
+                        <p>"Tropical beach resorts with boat activities and leisure"</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/10.jpg" alt="Colorful Village">
+                    <div class="gallery-overlay">
+                        <p>"Colorful Dominican villages and local cultural life"</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/16.jpg" alt="Concert Festival Scene">
+                    <div class="gallery-overlay">
+                        <p>"Electric energy of Dominican concerts and festivals"</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/26.jpg" alt="Aerial Beach Shadows">
+                    <div class="gallery-overlay">
+                        <p>"Serene beach moments with palm tree shadows and waves"</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/15.jpg" alt="Tropical Beach with Lounge Chairs">
+                    <div class="gallery-overlay">
+                        <p>"Resort life with beach lounging and tropical leisure"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ambassador Section -->
+    <section id="ambassador" class="ambassador">
+        <div class="container">
+            <div class="ambassador-content">
+                <div class="ambassador-text">
+                    <h2 class="section-title">Become a SΞNSΞ Ambassador</h2>
+                    <p class="section-subtitle">Drive the future of luxury student travel</p>
+                    <div class="ambassador-info">
+                        <div class="role-info">
+                            <h3><i class="fas fa-star"></i> Your Role</h3>
+                            <p>As an ambassador, you will be the engine driving SΞNSΞ travel forward. Your job is to represent SΞNSΞ at your campus and identify those travel-hungry students looking for luxury experiences at a fair price.</p>
+                        </div>
+                        <div class="perks-info">
+                            <h3><i class="fas fa-gift"></i> Perks</h3>
+                            <p>We value the work you put in, which is why we will be compensating your work through performance-based commissions and in-kind benefits at the same time.</p>
+                        </div>
+                    </div>
+                    <div class="ambassador-cta">
+                        <a href="ambassador.html" class="btn btn-primary">Apply Now</a>
+                        <a href="ambassador.html" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+                <div class="ambassador-image">
+                    <img src="images/5.jpg" alt="Campus ambassador representing SΞNSΞ">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-text">
+                    <h2 class="section-title">Ready to Experience SΞNSΞ?</h2>
+                    <p class="section-subtitle">Join our waitlist for exclusive access to upcoming trips</p>
+                    <p>Be the first to know about new villa releases, special pricing, and group opportunities.</p>
+                </div>
+                <div class="contact-form">
+                    <form id="waitlist-form">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <select id="interest" name="interest" required>
+                                <option value="">Select Experience Interest</option>
+                                <option value="villa">Luxury Accommodations</option>
+                                <option value="beach">Water Activities</option>
+                                <option value="cultural">Cultural Immersion</option>
+                                <option value="nightlife">Entertainment</option>
+                                <option value="adventure">Adventure</option>
+                                <option value="luxury">Premium Services</option>
+                                <option value="all">All Experiences</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Tell us about your dream trip (optional)"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Join Waitlist</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>SΞNSΞ</h3>
+                    <p>Travel that makes sense.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#safety">Safety</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Trips</h4>
+                        <ul>
+                            <li><a href="#trips">Villa Escapes</a></li>
+                            <li><a href="#trips">Cultural</a></li>
+                            <li><a href="#trips">Adventure</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <div class="social-links">
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SΞNSΞ TRΛVΞL ΛGΞNCY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Chat Button -->
+    <div class="whatsapp-chat">
+        <a href="https://wa.me/1234567890" target="_blank" aria-label="Chat on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html> 

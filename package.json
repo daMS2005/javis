@@ -1,0 +1,23 @@
+{
+  "name": "sense-travel-agency",
+  "version": "1.0.0",
+  "description": "SΞNSΞ TRΛVΞL ΛGΞNCY - Luxury Villa Escapes for Students",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 8000",
+    "start": "python -m http.server 8000"
+  },
+  "keywords": [
+    "travel",
+    "luxury",
+    "villas",
+    "dominican-republic",
+    "student-travel"
+  ],
+  "author": "SΞNSΞ TRΛVΞL ΛGΞNCY",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/sense-travel-agency.git"
+  }
+} 
