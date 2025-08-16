@@ -1,36 +1,12 @@
 {
   "version": 2,
   "name": "sense-travel-agency",
-  "builds": [
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
     {
-      "src": "*.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.css",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.js",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "images/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/ambassador",
-      "dest": "/ambassador.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "source": "/ambassador",
+      "destination": "/ambassador.html"
     }
   ],
   "headers": [
