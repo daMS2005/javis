@@ -12,10 +12,93 @@ document.addEventListener('DOMContentLoaded', function() {
     initImageLoading();
     initScrollAnimations();
     initTripCounter();
+    initTouchInteractions();
     
     // Handle pillar hash on page load
     handlePillarHash();
 });
+
+// Add touch-friendly interactions to all interactive elements
+function initTouchInteractions() {
+    // Buttons
+    document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.95)';
+        });
+        
+        btn.addEventListener('touchend', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+    
+    // Pillar cards
+    document.querySelectorAll('.pillar').forEach(pillar => {
+        pillar.addEventListener('touchstart', function() {
+            this.style.transform = 'translateY(-3px) scale(0.98)';
+        });
+        
+        pillar.addEventListener('touchend', function() {
+            this.style.transform = 'translateY(-3px) scale(1)';
+        });
+    });
+    
+    // Trip cards
+    document.querySelectorAll('.trip-card').forEach(card => {
+        card.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.98)';
+        });
+        
+        card.addEventListener('touchend', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+    
+    // Gallery items
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.98)';
+        });
+        
+        item.addEventListener('touchend', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+    
+    // Form inputs
+    document.querySelectorAll('input, select, textarea').forEach(input => {
+        input.addEventListener('focus', function() {
+            this.style.transform = 'scale(1.02)';
+        });
+        
+        input.addEventListener('blur', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+    
+    // Ambassador section specific interactions
+    document.querySelectorAll('.ambassador-cta .btn').forEach(btn => {
+        btn.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.95)';
+        });
+        
+        btn.addEventListener('touchend', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+    
+    // Role and perks info cards
+    document.querySelectorAll('.role-info, .perks-info').forEach(card => {
+        card.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.98)';
+            this.style.boxShadow = '0 8px 25px rgba(30, 58, 138, 0.15)';
+        });
+        
+        card.addEventListener('touchend', function() {
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = 'var(--shadow)';
+        });
+    });
+}
 
 // Hero Image Slideshow
 function initHeroSlideshow() {
@@ -41,6 +124,13 @@ function initMobileNavigation() {
         hamburger.addEventListener('click', function() {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            if (navMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
         });
         
         // Close mobile menu when clicking on a link
@@ -49,7 +139,26 @@ function initMobileNavigation() {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
             });
+            
+            // Add touch feedback
+            link.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.95)';
+            });
+            
+            link.addEventListener('touchend', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
         });
     }
 }
@@ -164,16 +273,33 @@ function initPillarSlider() {
     // Touch/swipe support for mobile
     let startX = 0;
     let endX = 0;
+    let isDragging = false;
     
     slider.addEventListener('touchstart', (e) => {
         startX = e.touches[0].clientX;
+        isDragging = true;
+        slider.style.transition = 'none';
+    });
+    
+    slider.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        
+        const currentX = e.touches[0].clientX;
+        const diff = startX - currentX;
+        const translateX = -currentSlide * 25 - (diff / slider.offsetWidth) * 25;
+        
+        slider.style.transform = `translateX(${translateX}%)`;
     });
     
     slider.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        
         endX = e.changedTouches[0].clientX;
         const diff = startX - endX;
         
-        if (Math.abs(diff) > 50) { // Minimum swipe distance
+        slider.style.transition = 'transform 0.3s ease-in-out';
+        
+        if (Math.abs(diff) > 80) { // Minimum swipe distance
             if (diff > 0 && currentSlide < totalSlides - 1) {
                 // Swipe left
                 currentSlide++;
@@ -182,8 +308,40 @@ function initPillarSlider() {
                 // Swipe right
                 currentSlide--;
                 updateSlider();
+            } else {
+                // Reset to current position
+                updateSlider();
             }
+        } else {
+            // Reset to current position
+            updateSlider();
         }
+        
+        isDragging = false;
+    });
+    
+    // Add touch feedback to navigation buttons
+    [prevBtn, nextBtn].forEach(btn => {
+        if (btn) {
+            btn.addEventListener('touchstart', function() {
+                this.style.transform = 'translateY(-50%) scale(0.95)';
+            });
+            
+            btn.addEventListener('touchend', function() {
+                this.style.transform = 'translateY(-50%) scale(1)';
+            });
+        }
+    });
+    
+    // Add touch feedback to dots
+    dots.forEach(dot => {
+        dot.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.9)';
+        });
+        
+        dot.addEventListener('touchend', function() {
+            this.style.transform = 'scale(1)';
+        });
     });
     
     // Initialize
@@ -470,26 +628,16 @@ style.textContent = `
         .nav-menu.active {
             display: flex;
             flex-direction: column;
-            position: absolute;
-            top: 100%;
+            position: fixed;
+            top: 0;
             left: 0;
             right: 0;
-            background: rgba(240, 249, 255, 0.98);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-        
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(240, 249, 255, 0.98), rgba(255, 255, 255, 0.95));
+            backdrop-filter: blur(15px);
+            padding: 6rem 2rem 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            z-index: 1000;
         }
     }
 `;
