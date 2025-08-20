@@ -421,6 +421,7 @@ p, li, .about-description, .safety-description {
     border: 2px solid var(--caribbean-blue);
     position: relative;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .pillar:nth-child(2),
@@ -657,53 +658,22 @@ p, li, .about-description, .safety-description {
     color: var(--caribbean-blue);
 }
 
-/* Safety Section */
+/* Safety Section with Sliding Pillars */
 .safety {
     padding: 100px 0;
     background: var(--seafoam-white);
 }
 
-.safety-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
+.safety .section-title {
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
-.safety-description {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
+.safety .section-subtitle {
+    text-align: center;
     color: var(--midnight-navy);
-    line-height: 1.8;
-}
-
-.safety-features {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.safety-feature {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem;
-    background: linear-gradient(135deg, var(--azure-highlight), var(--tropical-cyan));
-    border-radius: var(--border-radius);
-}
-
-.safety-feature i {
-    color: white;
+    margin-bottom: 4rem;
     font-size: 1.2rem;
-}
-
-.safety-image img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
 }
 
 /* Real Trip Moments Section */
@@ -1049,6 +1019,9 @@ p, li, .about-description, .safety-description {
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
     color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .gallery-cta {
@@ -1077,6 +1050,246 @@ p, li, .about-description, .safety-description {
     flex-wrap: wrap;
 }
 
+/* Pillars Page Styles */
+.pillars-hero {
+    padding: 120px 0 80px;
+    background: linear-gradient(135deg, var(--seafoam-white), var(--azure-highlight));
+    text-align: center;
+}
+
+.pillars-hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.pillar-nav {
+    padding: 60px 0;
+    background: white;
+    border-bottom: 1px solid var(--ocean-sky);
+}
+
+.pillar-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.pillar-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem 2rem;
+    border: 2px solid var(--caribbean-blue);
+    background: transparent;
+    color: var(--caribbean-blue);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+    min-width: 140px;
+}
+
+.pillar-tab:nth-child(2),
+.pillar-tab:nth-child(3) {
+    border-color: var(--dominican-red);
+    color: var(--dominican-red);
+}
+
+.pillar-tab.active,
+.pillar-tab:hover {
+    background: var(--caribbean-blue);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(30, 58, 138, 0.2);
+}
+
+.pillar-tab:nth-child(2).active,
+.pillar-tab:nth-child(2):hover,
+.pillar-tab:nth-child(3).active,
+.pillar-tab:nth-child(3):hover {
+    background: var(--dominican-red);
+    color: white;
+    box-shadow: 0 8px 25px rgba(220, 38, 38, 0.2);
+}
+
+.pillar-tab i {
+    font-size: 2rem;
+}
+
+.pillar-tab span {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.pillar-content {
+    padding: 80px 0;
+    background: var(--seafoam-white);
+    min-height: 600px;
+    overflow: hidden;
+}
+
+.pillar-slider-container {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 80px;
+}
+
+.pillar-slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 400%;
+}
+
+.pillar-slide {
+    width: 25%;
+    flex-shrink: 0;
+    padding: 0 30px;
+}
+
+.pillar-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.pillar-text h3 {
+    font-size: 2.5rem;
+    color: var(--caribbean-blue);
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.pillar-description {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--midnight-navy);
+    margin-bottom: 3rem;
+}
+
+.pillar-features {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.feature {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.feature i {
+    font-size: 1.5rem;
+    color: var(--caribbean-blue);
+    margin-top: 0.25rem;
+    min-width: 24px;
+}
+
+.feature h4 {
+    font-size: 1.1rem;
+    color: var(--midnight-navy);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.feature p {
+    color: var(--midnight-navy);
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+.pillar-image {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.pillar-image img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+}
+
+.pillars-cta {
+    padding: 80px 0;
+    background: linear-gradient(135deg, var(--caribbean-blue), var(--sapphire-deep));
+    color: white;
+    text-align: center;
+}
+
+/* Pillar Navigation Dots */
+.pillar-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 40px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(30, 58, 138, 0.3);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.dot.active {
+    background: var(--caribbean-blue);
+    transform: scale(1.2);
+}
+
+.dot:hover {
+    background: var(--caribbean-blue);
+    transform: scale(1.1);
+}
+
+/* Pillar Navigation Arrows */
+.pillar-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border: 2px solid var(--caribbean-blue);
+    color: var(--caribbean-blue);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.pillar-nav-btn:hover {
+    background: var(--caribbean-blue);
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.2);
+}
+
+.pillar-nav-btn.prev {
+    left: 0;
+}
+
+.pillar-nav-btn.next {
+    right: 0;
+}
+
+.pillar-nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: translateY(-50%) scale(1);
+}
+
 .gallery-item {
     position: relative;
     height: 300px;
@@ -1101,11 +1314,12 @@ p, li, .about-description, .safety-description {
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
     color: white;
     padding: 2rem 1.5rem 1.5rem;
     transform: translateY(100%);
     transition: var(--transition);
+    backdrop-filter: blur(2px);
 }
 
 .gallery-item:hover .gallery-overlay {
@@ -1886,6 +2100,55 @@ img.loaded {
     .gallery-cta .btn {
         width: 100%;
         max-width: 280px;
+    }
+    
+    .pillar-tabs {
+        gap: 0.5rem;
+    }
+    
+    .pillar-tab {
+        padding: 1rem 1.5rem;
+        min-width: 120px;
+    }
+    
+    .pillar-tab i {
+        font-size: 1.5rem;
+    }
+    
+    .pillar-tab span {
+        font-size: 0.9rem;
+    }
+    
+    .pillar-content-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .pillar-text h2 {
+        font-size: 2rem;
+    }
+    
+    .pillar-image img {
+        height: 300px;
+    }
+    
+    .pillar-slider-container {
+        padding: 0 40px;
+    }
+    
+    .pillar-nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .pillar-dots {
+        margin-top: 30px;
+    }
+    
+    .dot {
+        width: 10px;
+        height: 10px;
     }
 }
 

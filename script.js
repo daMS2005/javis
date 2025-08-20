@@ -6,11 +6,15 @@ document.addEventListener('DOMContentLoaded', function() {
     initMobileNavigation();
     initTripFilters();
     initGalleryFilters();
+    initPillarSlider();
     initSmoothScrolling();
     initFormHandling();
     initImageLoading();
     initScrollAnimations();
     initTripCounter();
+    
+    // Handle pillar hash on page load
+    handlePillarHash();
 });
 
 // Hero Image Slideshow
@@ -104,6 +108,150 @@ function initGalleryFilters() {
             });
         });
     });
+}
+
+// Pillar Slider Navigation
+let currentSlide = 0;
+const totalSlides = 4;
+
+function initPillarSlider() {
+    const slider = document.querySelector('.pillar-slider');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.querySelector('.pillar-nav-btn.prev');
+    const nextBtn = document.querySelector('.pillar-nav-btn.next');
+    
+    if (!slider) return;
+    
+    // Update slider position
+    function updateSlider() {
+        updatePillarSlider();
+    }
+    
+    // Dot navigation
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentSlide = index;
+            updateSlider();
+        });
+    });
+    
+    // Arrow navigation
+    prevBtn.addEventListener('click', () => {
+        if (currentSlide > 0) {
+            currentSlide--;
+            updateSlider();
+        }
+    });
+    
+    nextBtn.addEventListener('click', () => {
+        if (currentSlide < totalSlides - 1) {
+            currentSlide++;
+            updateSlider();
+        }
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' && currentSlide > 0) {
+            currentSlide--;
+            updateSlider();
+        } else if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) {
+            currentSlide++;
+            updateSlider();
+        }
+    });
+    
+    // Touch/swipe support for mobile
+    let startX = 0;
+    let endX = 0;
+    
+    slider.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+    });
+    
+    slider.addEventListener('touchend', (e) => {
+        endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > 50) { // Minimum swipe distance
+            if (diff > 0 && currentSlide < totalSlides - 1) {
+                // Swipe left
+                currentSlide++;
+                updateSlider();
+            } else if (diff < 0 && currentSlide > 0) {
+                // Swipe right
+                currentSlide--;
+                updateSlider();
+            }
+        }
+    });
+    
+    // Initialize
+    updateSlider();
+}
+
+// Scroll to pillar function
+function scrollToPillar(pillarId) {
+    const safetySection = document.getElementById('safety');
+    if (!safetySection) return;
+    
+    // Smooth scroll to safety section
+    safetySection.scrollIntoView({ behavior: 'smooth' });
+    
+    // Set the correct slide after scrolling
+    setTimeout(() => {
+        const pillarMap = {
+            'luxury': 0,
+            'peer-built': 1,
+            'personalized': 2,
+            'safety-pillar': 3
+        };
+        
+        if (pillarMap.hasOwnProperty(pillarId)) {
+            currentSlide = pillarMap[pillarId];
+            updatePillarSlider();
+        }
+    }, 800); // Wait for scroll to complete
+}
+
+// Update pillar slider function
+function updatePillarSlider() {
+    const slider = document.querySelector('.pillar-slider');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.querySelector('.pillar-nav-btn.prev');
+    const nextBtn = document.querySelector('.pillar-nav-btn.next');
+    
+    if (!slider) return;
+    
+    const translateX = -currentSlide * 25;
+    slider.style.transform = `translateX(${translateX}%)`;
+    
+    // Update dots
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+    });
+    
+    // Update navigation buttons
+    if (prevBtn && nextBtn) {
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === totalSlides - 1;
+    }
+}
+
+// Handle URL hash for direct pillar access
+function handlePillarHash() {
+    const hash = window.location.hash.substring(1);
+    const pillarMap = {
+        'luxury': 0,
+        'peer-built': 1,
+        'personalized': 2,
+        'safety': 3
+    };
+    
+    if (hash && pillarMap.hasOwnProperty(hash)) {
+        currentSlide = pillarMap[hash];
+        updatePillarSlider();
+    }
 }
 
 // Smooth Scrolling

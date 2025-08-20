@@ -82,19 +82,19 @@
                         unforgettable memories with peers.
                     </p>
                     <div class="brand-pillars">
-                        <div class="pillar">
+                        <div class="pillar" onclick="scrollToPillar('luxury')">
                             <i class="fas fa-crown"></i>
                             <h4>Luxury</h4>
                         </div>
-                        <div class="pillar">
+                        <div class="pillar" onclick="scrollToPillar('peer-built')">
                             <i class="fas fa-users"></i>
                             <h4>Peer-built</h4>
                         </div>
-                        <div class="pillar">
+                        <div class="pillar" onclick="scrollToPillar('personalized')">
                             <i class="fas fa-user-check"></i>
                             <h4>Personalized</h4>
                         </div>
-                        <div class="pillar">
+                        <div class="pillar" onclick="scrollToPillar('safety-pillar')">
                             <i class="fas fa-shield-alt"></i>
                             <h4>Safety</h4>
                         </div>
@@ -113,14 +113,7 @@
             <h2 class="section-title"><span class="brand-name">SΞNSΞ</span> Experiences</h2>
             <p class="section-subtitle">Discover the activities and adventures that await you in the Dominican Republic</p>
             
-            <div class="trip-filters">
-                <button class="filter-btn active" data-filter="all">All Experiences</button>
-                <button class="filter-btn" data-filter="villa">Luxury Accommodations</button>
-                <button class="filter-btn" data-filter="beach">Water Experiences</button>
-                <button class="filter-btn" data-filter="cultural">Cultural Experiences</button>
-                <button class="filter-btn" data-filter="adventure">Adventure & Entertainment</button>
-                <button class="filter-btn" data-filter="luxury">Premium Services</button>
-            </div>
+
 
             <div class="trips-grid">
                 <div class="trip-card" data-category="villa">
@@ -243,39 +236,190 @@
         </div>
     </section>
 
-    <!-- Safety Section -->
+    <!-- Safety Section with Sliding Pillars -->
     <section id="safety" class="safety">
         <div class="container">
-            <div class="safety-content">
-                <div class="safety-text">
-                    <h2 class="section-title">Your Safety, Our Priority</h2>
-                    <p class="safety-description">
-                        SΞNSΞ delivers exceptional travel experiences through strict safety protocols. 
-                        Destinations are chosen for the perfect blend of luxury, accessibility, and security.
-                    </p>
-                    <p class="safety-description">
-                        All trips include 24/7 medical staff, vetted on-site coordinators, and private 
-                        transportation. We partner only with reliable local providers, ensuring peace of mind 
-                        while you create unforgettable memories.
-                    </p>
-                    <div class="safety-features">
-                        <div class="safety-feature">
-                            <i class="fas fa-user-md"></i>
-                            <span>24/7 Medical Staff</span>
+            <h2 class="section-title"><span class="brand-name">SΞNSΞ</span> four pillars</h2>
+            <p class="section-subtitle">Discover the four pillars that define SΞNSΞ TRΛVΞL ΛGΞNCY</p>
+            
+            <div class="pillar-slider-container">
+                <div class="pillar-slider">
+                    <!-- Luxury Pillar -->
+                    <div class="pillar-slide" id="luxury">
+                        <div class="pillar-content-grid">
+                            <div class="pillar-text">
+                                <h3>Luxury Redefined</h3>
+                                <p class="pillar-description">
+                                    At SΞNSΞ, luxury isn't just about expensive accommodations—it's about creating 
+                                    extraordinary experiences that exceed expectations. We curate the finest villas, 
+                                    exclusive access to hidden gems, and premium services that make every moment special.
+                                </p>
+                                <div class="pillar-features">
+                                    <div class="feature">
+                                        <i class="fas fa-home"></i>
+                                        <div>
+                                            <h4>Exclusive Villas</h4>
+                                            <p>Handpicked luxury accommodations in the most desirable locations</p>
+                                        </div>
+                                    </div>
+                                    <div class="feature">
+                                        <i class="fas fa-concierge-bell"></i>
+                                        <div>
+                                            <h4>Premium Services</h4>
+                                            <p>24/7 concierge, private chefs, and personalized attention</p>
+                                        </div>
+                                    </div>
+                                    <div class="feature">
+                                        <i class="fas fa-star"></i>
+                                        <div>
+                                            <h4>Unique Experiences</h4>
+                                            <p>Access to exclusive venues and activities not available to regular tourists</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pillar-image">
+                                <img src="images/11.jpg" alt="Luxury overwater bungalows">
+                            </div>
                         </div>
-                        <div class="safety-feature">
-                            <i class="fas fa-car"></i>
-                            <span>Private Transportation</span>
+                    </div>
+
+                    <!-- Peer-Built Pillar -->
+                    <div class="pillar-slide" id="peer-built">
+                        <div class="pillar-content-grid">
+                            <div class="pillar-text">
+                                <h3>Built by Students, for Students</h3>
+                                <p class="pillar-description">
+                                    SΞNSΞ was created by students who understand what students want. Every experience, 
+                                    every detail, and every decision is made with your perspective in mind. We know 
+                                    the balance between adventure and comfort, excitement and safety.
+                                </p>
+                                <div class="pillar-features">
+                                    <div class="feature">
+                                        <i class="fas fa-lightbulb"></i>
+                                        <div>
+                                            <h4>Student Perspective</h4>
+                                            <p>Every experience designed with student needs and preferences in mind</p>
+                                        </div>
+                                    </div>
+                                    <div class="feature">
+                                        <i class="fas fa-comments"></i>
+                                        <div>
+                                            <h4>Direct Feedback</h4>
+                                            <p>Continuous improvement based on real student experiences and suggestions</p>
+                                        </div>
+                                    </div>
+                                    <div class="feature">
+                                        <i class="fas fa-heart"></i>
+                                        <div>
+                                            <h4>Authentic Connection</h4>
+                                            <p>Genuine understanding of what makes student travel special</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pillar-image">
+                                <img src="images/16.jpg" alt="Student group enjoying concert">
+                            </div>
                         </div>
-                        <div class="safety-feature">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>Vetted Coordinators</span>
+                    </div>
+
+                    <!-- Personalized Pillar -->
+                    <div class="pillar-slide" id="personalized">
+                        <div class="pillar-content-grid">
+                            <div class="pillar-text">
+                                <h3>Your Journey, Your Way</h3>
+                                <p class="pillar-description">
+                                    No two travelers are alike, and no two SΞNSΞ experiences should be either. 
+                                    We take the time to understand your preferences, interests, and travel style 
+                                    to create a journey that's uniquely yours.
+                                </p>
+                                <div class="pillar-features">
+                                    <div class="feature">
+                                        <i class="fas fa-clipboard-list"></i>
+                                        <div>
+                                            <h4>Custom Planning</h4>
+                                            <p>Tailored itineraries based on your interests and preferences</p>
+                                        </div>
+                                    </div>
+                                    <div class="feature">
+                                        <i class="fas fa-cog"></i>
+                                        <div>
+                                            <h4>Flexible Options</h4>
+                                            <p>Mix and match experiences to create your perfect trip</p>
+                                        </div>
+                                    </div>
+                                    <div class="feature">
+                                        <i class="fas fa-user-friends"></i>
+                                        <div>
+                                            <h4>Group Dynamics</h4>
+                                            <p>Consideration for group dynamics and individual needs</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pillar-image">
+                                <img src="images/15.jpg" alt="Personalized beach experience">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Safety Pillar -->
+                    <div class="pillar-slide" id="safety-pillar">
+                        <div class="pillar-content-grid">
+                            <div class="pillar-text">
+                                <h3>Your Safety, Our Priority</h3>
+                                <p class="pillar-description">
+                                    We understand that safety is paramount, especially when traveling to new destinations. 
+                                    Our comprehensive safety protocols ensure you can focus on creating memories while 
+                                    we handle the details of your security and well-being.
+                                </p>
+                                <div class="pillar-features">
+                                    <div class="feature">
+                                        <i class="fas fa-user-md"></i>
+                                        <div>
+                                            <h4>24/7 Medical Support</h4>
+                                            <p>Round-the-clock medical staff and emergency response teams</p>
+                                        </div>
+                                    </div>
+                                    <div class="feature">
+                                        <i class="fas fa-car"></i>
+                                        <div>
+                                            <h4>Secure Transportation</h4>
+                                            <p>Vetted drivers and private transportation for all activities</p>
+                                        </div>
+                                    </div>
+                                    <div class="feature">
+                                        <i class="fas fa-shield-alt"></i>
+                                        <div>
+                                            <h4>Vetted Partners</h4>
+                                            <p>All local providers thoroughly screened and monitored</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pillar-image">
+                                <img src="images/8.jpg" alt="Safe travel experience">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="safety-image">
-                    <img src="images/8.jpg" alt="Safe travel experience">
+                
+                <!-- Navigation Dots -->
+                <div class="pillar-dots">
+                    <div class="dot active" data-slide="0"></div>
+                    <div class="dot" data-slide="1"></div>
+                    <div class="dot" data-slide="2"></div>
+                    <div class="dot" data-slide="3"></div>
                 </div>
+                
+                <!-- Navigation Arrows -->
+                <button class="pillar-nav-btn prev" aria-label="Previous pillar">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="pillar-nav-btn next" aria-label="Next pillar">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
     </section>
