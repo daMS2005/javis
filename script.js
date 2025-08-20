@@ -120,10 +120,39 @@ function initMobileNavigation() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
     
+    console.log('Mobile Navigation Init:', { hamburger: !!hamburger, navMenu: !!navMenu });
+    
     if (hamburger && navMenu) {
-        hamburger.addEventListener('click', function() {
+        hamburger.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('Hamburger clicked');
+            
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
+            
+            console.log('Menu active:', navMenu.classList.contains('active'));
+            
+            // Prevent body scroll when menu is open
+            if (navMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Add touch event for mobile
+        hamburger.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('Hamburger touched');
+            
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            
+            console.log('Menu active:', navMenu.classList.contains('active'));
             
             // Prevent body scroll when menu is open
             if (navMenu.classList.contains('active')) {
