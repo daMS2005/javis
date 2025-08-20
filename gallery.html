@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery - SΞNSΞ TRΛVΞL ΛGΞNCY</title>
+    <meta name="description" content="Explore our stunning photo gallery showcasing luxury villas, tropical beaches, and authentic Dominican experiences.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>SΞNSΞ</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#trips">Experiences</a></li>
+                <li><a href="index.html#safety">Safety</a></li>
+                <li><a href="index.html#gallery">Gallery</a></li>
+                <li><a href="index.html#upcoming">Upcoming</a></li>
+                <li><a href="index.html#ambassador">Ambassador</a></li>
+                <li><a href="index.html#contact" class="cta-button">Join Waitlist</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Gallery Hero Section -->
+    <section class="gallery-hero">
+        <div class="container">
+            <div class="gallery-hero-content">
+                <h1 class="section-title">Photo Gallery</h1>
+                <p class="section-subtitle">Discover the beauty of the Dominican Republic through our curated collection</p>
+                <p class="gallery-description">
+                    From pristine beaches and luxury villas to vibrant culture and thrilling adventures, 
+                    explore the experiences that await you with SΞNSΞ TRΛVΞL ΛGΞNCY.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Categories -->
+    <section class="gallery-categories">
+        <div class="container">
+            <div class="category-filters">
+                <button class="category-btn active" data-category="all">All Photos</button>
+                <button class="category-btn" data-category="villas">Luxury Villas</button>
+                <button class="category-btn" data-category="beaches">Beaches & Water</button>
+                <button class="category-btn" data-category="culture">Culture & Heritage</button>
+                <button class="category-btn" data-category="adventure">Adventure & Entertainment</button>
+                <button class="category-btn" data-category="nature">Nature & Wildlife</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Gallery Grid -->
+    <section class="main-gallery">
+        <div class="container">
+            <div class="gallery-grid-large">
+                <!-- Luxury Villas & Resorts -->
+                <div class="gallery-item" data-category="villas">
+                    <img src="images/6.jpg" alt="Resort Swimming Pool">
+                    <div class="gallery-overlay">
+                        <h3>Luxury Resort Pools</h3>
+                        <p>Swim-up bars and tropical vegetation</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="villas">
+                    <img src="images/11.jpg" alt="Overwater Hut Resort">
+                    <div class="gallery-overlay">
+                        <h3>Overwater Bungalows</h3>
+                        <p>Exclusive overwater accommodations</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="villas">
+                    <img src="images/22.jpg" alt="Night Resort Pool">
+                    <div class="gallery-overlay">
+                        <h3>Night Resort Ambiance</h3>
+                        <p>Luxurious evening atmosphere</p>
+                    </div>
+                </div>
+
+                <!-- Beaches & Water Activities -->
+                <div class="gallery-item" data-category="beaches">
+                    <img src="images/14.jpg" alt="Beach Resort Scene">
+                    <div class="gallery-overlay">
+                        <h3>Tropical Beach Resorts</h3>
+                        <p>Boat activities and leisure</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="beaches">
+                    <img src="images/15.jpg" alt="Tropical Beach with Lounge Chairs">
+                    <div class="gallery-overlay">
+                        <h3>Beach Lounging</h3>
+                        <p>Resort life and tropical leisure</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="beaches">
+                    <img src="images/26.jpg" alt="Aerial Beach Shadows">
+                    <div class="gallery-overlay">
+                        <h3>Serene Beach Moments</h3>
+                        <p>Palm tree shadows and waves</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="beaches">
+                    <img src="images/17.jpg" alt="Tropical Bay View">
+                    <div class="gallery-overlay">
+                        <h3>Tropical Bay Views</h3>
+                        <p>Arched bridge and boats</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="beaches">
+                    <img src="images/28.jpg" alt="Aerial Cenote">
+                    <div class="gallery-overlay">
+                        <h3>Pristine Cenotes</h3>
+                        <p>Natural swimming holes</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="beaches">
+                    <img src="images/30.jpg" alt="Underwater Coral Reef">
+                    <div class="gallery-overlay">
+                        <h3>Underwater Adventures</h3>
+                        <p>Coral reefs and marine life</p>
+                    </div>
+                </div>
+
+                <!-- Culture & Heritage -->
+                <div class="gallery-item" data-category="culture">
+                    <img src="images/10.jpg" alt="Colorful Village">
+                    <div class="gallery-overlay">
+                        <h3>Colorful Dominican Villages</h3>
+                        <p>Local cultural life</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="culture">
+                    <img src="images/19.jpg" alt="Street Art Market">
+                    <div class="gallery-overlay">
+                        <h3>Street Art Markets</h3>
+                        <p>Artistic and cultural scenes</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="culture">
+                    <img src="images/34.jpg" alt="Historic Street Scene">
+                    <div class="gallery-overlay">
+                        <h3>Historic Architecture</h3>
+                        <p>Colonial charm and heritage</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="culture">
+                    <img src="images/20.jpg" alt="Historic Fortress">
+                    <div class="gallery-overlay">
+                        <h3>Historic Fortress</h3>
+                        <p>Dominican Republic heritage</p>
+                    </div>
+                </div>
+
+                <!-- Adventure & Entertainment -->
+                <div class="gallery-item" data-category="adventure">
+                    <img src="images/16.jpg" alt="Concert Festival Scene">
+                    <div class="gallery-overlay">
+                        <h3>Electric Concerts</h3>
+                        <p>Dominican festivals and energy</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="adventure">
+                    <img src="images/21.jpg" alt="Nightclub Celebration">
+                    <div class="gallery-overlay">
+                        <h3>Nightlife Celebrations</h3>
+                        <p>Champagne and sparklers</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="adventure">
+                    <img src="images/12.jpg" alt="Parasailing Adventure">
+                    <div class="gallery-overlay">
+                        <h3>Parasailing Adventures</h3>
+                        <p>Thrilling water activities</p>
+                    </div>
+                </div>
+
+                <!-- Nature & Wildlife -->
+                <div class="gallery-item" data-category="nature">
+                    <img src="images/25.jpg" alt="Aerial Waterfall">
+                    <div class="gallery-overlay">
+                        <h3>Natural Waterfalls</h3>
+                        <p>Stunning waterfalls and jungle</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="nature">
+                    <img src="images/13.jpg" alt="Aerial Coastal Landscape">
+                    <div class="gallery-overlay">
+                        <h3>Coastal Landscapes</h3>
+                        <p>Bird's-eye views of paradise</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="nature">
+                    <img src="images/7.jpg" alt="Beach Sunset">
+                    <div class="gallery-overlay">
+                        <h3>Beach Sunsets</h3>
+                        <p>Tranquil coastal moments</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="nature">
+                    <img src="images/18.jpg" alt="Tropical Pathway">
+                    <div class="gallery-overlay">
+                        <h3>Tropical Pathways</h3>
+                        <p>Palm-lined paths to paradise</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="nature">
+                    <img src="images/8.jpg" alt="Toucan Portrait">
+                    <div class="gallery-overlay">
+                        <h3>Exotic Wildlife</h3>
+                        <p>Colorful toucan encounters</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Home CTA -->
+    <section class="gallery-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Experience These Moments?</h2>
+                <p>Join SΞNSΞ TRΛVΞL ΛGΞNCY and create your own unforgettable memories</p>
+                <div class="cta-buttons">
+                    <a href="index.html#contact" class="btn btn-primary">Join Waitlist</a>
+                    <a href="index.html#trips" class="btn btn-secondary">Explore Experiences</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3 class="brand-name">SΞNSΞ</h3>
+                    <p>Travel that makes sense.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="index.html#about">About</a></li>
+                            <li><a href="index.html#safety">Safety</a></li>
+                            <li><a href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Experiences</h4>
+                        <ul>
+                            <li><a href="index.html#trips">Villa Escapes</a></li>
+                            <li><a href="index.html#trips">Cultural</a></li>
+                            <li><a href="index.html#trips">Adventure</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <div class="social-links">
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SΞNSΞ TRΛVΞL ΛGΞNCY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Chat Button -->
+    <div class="whatsapp-chat">
+        <a href="https://wa.me/1234567890" target="_blank" aria-label="Chat on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html> 

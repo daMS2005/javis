@@ -5,10 +5,12 @@ document.addEventListener('DOMContentLoaded', function() {
     initHeroSlideshow();
     initMobileNavigation();
     initTripFilters();
+    initGalleryFilters();
     initSmoothScrolling();
     initFormHandling();
     initImageLoading();
     initScrollAnimations();
+    initTripCounter();
 });
 
 // Hero Image Slideshow
@@ -70,6 +72,34 @@ function initTripFilters() {
                     card.style.animation = 'fadeInUp 0.6s ease forwards';
                 } else {
                     card.style.display = 'none';
+                }
+            });
+        });
+    });
+}
+
+// Gallery Category Filters
+function initGalleryFilters() {
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const category = this.getAttribute('data-category');
+            
+            // Update active button
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filter gallery items
+            galleryItems.forEach(item => {
+                const itemCategory = item.getAttribute('data-category');
+                
+                if (category === 'all' || itemCategory === category) {
+                    item.style.display = 'block';
+                    item.style.animation = 'fadeInUp 0.6s ease forwards';
+                } else {
+                    item.style.display = 'none';
                 }
             });
         });
@@ -345,6 +375,45 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Trip Counter
+function initTripCounter() {
+    const tripCountElement = document.getElementById('trip-count');
+    if (tripCountElement) {
+        // For now, set to 0. In the future, this could be dynamic
+        let currentCount = 0;
+        
+        // Animate the counter on page load
+        const animateCounter = () => {
+            const targetCount = 0; // This will be updated when trips are added
+            const duration = 2000; // 2 seconds
+            const steps = 60;
+            const increment = targetCount / steps;
+            let current = 0;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= targetCount) {
+                    current = targetCount;
+                    clearInterval(timer);
+                }
+                tripCountElement.textContent = Math.floor(current);
+            }, duration / steps);
+        };
+        
+        // Start animation when the element comes into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+        
+        observer.observe(tripCountElement);
+    }
+}
 
 // Form validation
 function validateForm(form) {
