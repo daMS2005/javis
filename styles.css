@@ -28,6 +28,12 @@
     box-sizing: border-box;
 }
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -178,6 +184,8 @@ p, li, .about-description, .safety-description {
     text-decoration: none;
     display: block;
     transition: var(--transition);
+    border: none;
+    outline: none;
 }
 
 .nav-logo a:hover {
@@ -198,6 +206,9 @@ p, li, .about-description, .safety-description {
     background-clip: text;
     filter: drop-shadow(0 2px 4px rgba(30, 58, 138, 0.3));
     transition: all 0.3s ease;
+    text-decoration: none;
+    border: none;
+    outline: none;
 }
 
 .nav-menu {
@@ -684,6 +695,9 @@ p, li, .about-description, .safety-description {
 .safety {
     padding: 100px 0;
     background: var(--seafoam-white);
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
 }
 
 .safety .section-title {
@@ -1160,9 +1174,10 @@ p, li, .about-description, .safety-description {
 
 .pillar-slider-container {
     position: relative;
-    max-width: 1400px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 80px;
+    padding: 0 20px;
+    overflow: hidden;
 }
 
 .pillar-slider {
@@ -1649,6 +1664,15 @@ p, li, .about-description, .safety-description {
     .nav-logo h2 {
         font-size: clamp(1.5rem, 5vw, 2rem);
         letter-spacing: clamp(2px, 1vw, 4px);
+        text-decoration: none;
+        border: none;
+        outline: none;
+    }
+    
+    .nav-logo a {
+        text-decoration: none;
+        border: none;
+        outline: none;
     }
     /* Mobile Navigation Layout */
     .nav-container {
