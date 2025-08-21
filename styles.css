@@ -249,13 +249,22 @@ p, li, .about-description, .safety-description {
 .cta-button {
     background: var(--ocean-sky);
     color: white !important;
-    padding: 8px 16px;
+    padding: 16px 32px;
     border-radius: var(--border-radius);
+    font-size: 1.2rem;
+    font-weight: 600;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    min-width: 160px;
 }
 
 .cta-button:hover {
     background: var(--caribbean-blue);
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3);
 }
 
 .hamburger {
@@ -1763,6 +1772,11 @@ p, li, .about-description, .safety-description {
         border: 2px solid var(--ocean-sky);
         font-weight: 600;
         margin-top: 1rem;
+        padding: 14px 28px;
+        font-size: 1.1rem;
+        min-height: 52px;
+        white-space: nowrap;
+        min-width: 140px;
     }
     
     .nav-menu .cta-button:hover {
@@ -2841,11 +2855,12 @@ img.loaded {
     }
     
     .preview-item {
-        height: 140px;
+        aspect-ratio: 1;
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         border: 1px solid rgba(0, 0, 0, 0.05);
         overflow: hidden;
+        position: relative;
     }
     
     .preview-item img {
@@ -3030,14 +3045,16 @@ img.loaded {
         gap: 0.8rem;
         margin-bottom: 2rem;
         grid-template-columns: repeat(2, 1fr);
+        aspect-ratio: 1;
     }
     
     .preview-item {
-        height: 120px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        aspect-ratio: 1;
+        border-radius: 10px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
         border: 1px solid rgba(0, 0, 0, 0.05);
         overflow: hidden;
+        position: relative;
     }
     
     .preview-item img {
