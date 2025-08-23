@@ -251,6 +251,32 @@ function initGalleryFilters() {
 // Pillar Slider Navigation
 let currentSlide = 0;
 const totalSlides = 4;
+let autoScrollInterval;
+let isAutoScrolling = true;
+
+// Auto-scroll functionality (global)
+function startAutoScroll() {
+    if (autoScrollInterval) clearInterval(autoScrollInterval);
+    autoScrollInterval = setInterval(() => {
+        if (isAutoScrolling) {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updatePillarSlider();
+        }
+    }, 6000); // 6 seconds
+}
+
+function pauseAutoScroll() {
+    isAutoScrolling = false;
+    if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+        autoScrollInterval = null;
+    }
+}
+
+function resumeAutoScroll() {
+    isAutoScrolling = true;
+    startAutoScroll();
+}
 
 function initPillarSlider() {
     const slider = document.querySelector('.pillar-slider');
@@ -270,6 +296,8 @@ function initPillarSlider() {
         dot.addEventListener('click', () => {
             currentSlide = index;
             updateSlider();
+            pauseAutoScroll();
+            setTimeout(resumeAutoScroll, 10000); // Resume after 10 seconds
         });
     });
     
@@ -278,6 +306,8 @@ function initPillarSlider() {
         if (currentSlide > 0) {
             currentSlide--;
             updateSlider();
+            pauseAutoScroll();
+            setTimeout(resumeAutoScroll, 10000); // Resume after 10 seconds
         }
     });
     
@@ -285,6 +315,8 @@ function initPillarSlider() {
         if (currentSlide < totalSlides - 1) {
             currentSlide++;
             updateSlider();
+            pauseAutoScroll();
+            setTimeout(resumeAutoScroll, 10000); // Resume after 10 seconds
         }
     });
     
@@ -293,9 +325,13 @@ function initPillarSlider() {
         if (e.key === 'ArrowLeft' && currentSlide > 0) {
             currentSlide--;
             updateSlider();
+            pauseAutoScroll();
+            setTimeout(resumeAutoScroll, 10000); // Resume after 10 seconds
         } else if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) {
             currentSlide++;
             updateSlider();
+            pauseAutoScroll();
+            setTimeout(resumeAutoScroll, 10000); // Resume after 10 seconds
         }
     });
     
@@ -333,10 +369,14 @@ function initPillarSlider() {
                 // Swipe left
                 currentSlide++;
                 updateSlider();
+                pauseAutoScroll();
+                setTimeout(resumeAutoScroll, 10000); // Resume after 10 seconds
             } else if (diff < 0 && currentSlide > 0) {
                 // Swipe right
                 currentSlide--;
                 updateSlider();
+                pauseAutoScroll();
+                setTimeout(resumeAutoScroll, 10000); // Resume after 10 seconds
             } else {
                 // Reset to current position
                 updateSlider();
@@ -375,6 +415,7 @@ function initPillarSlider() {
     
     // Initialize
     updateSlider();
+    startAutoScroll();
 }
 
 // Scroll to pillar function
@@ -397,6 +438,10 @@ function scrollToPillar(pillarId) {
         if (pillarMap.hasOwnProperty(pillarId)) {
             currentSlide = pillarMap[pillarId];
             updatePillarSlider();
+            // Pause auto-scroll when navigating from other sections
+            pauseAutoScroll();
+            // Resume after 5 seconds
+            setTimeout(resumeAutoScroll, 5000);
         }
     }, 800); // Wait for scroll to complete
 }
