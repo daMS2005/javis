@@ -10,6 +10,9 @@
     --midnight-navy: #1E293B;       /* Deep navy for text */
     --azure-highlight: #60A5FA;     /* Light blue highlight */
     --sapphire-deep: #1E40AF;       /* Deep sapphire for depth */
+    --larimar-blue: #44c0c5;        /* Larimar like our national stone */
+    --mangrove-green: #148c84;      /* Mangrove green for secondary elements */
+    --seashell-white: #fbfaf7;      /* Seashell White to give a more intense beach vibe */
     
     --font-serif: 'Playfair Display', serif;
     --font-sans: 'Inter', sans-serif;
@@ -117,7 +120,7 @@ p, li, .about-description, .safety-description {
 .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
-    background: linear-gradient(135deg, var(--caribbean-blue), var(--sapphire-deep));
+    background: linear-gradient(135deg, var(--caribbean-blue), var(--larimar-blue));
 }
 
 .btn-primary:active {
