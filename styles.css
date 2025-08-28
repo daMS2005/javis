@@ -1137,9 +1137,9 @@ p, li, .about-description, .safety-description {
     align-items: center;
     gap: 0.5rem;
     padding: 1.5rem 2rem;
-    border: 2px solid var(--caribbean-blue);
+    border: 2px solid var( --midnight-navy);
     background: transparent;
-    color: var(--caribbean-blue);
+    color: var( --midnight-navy);
     border-radius: var(--border-radius);
     cursor: pointer;
     transition: var(--transition);
@@ -1155,7 +1155,7 @@ p, li, .about-description, .safety-description {
 
 .pillar-tab.active,
 .pillar-tab:hover {
-    background: var(--caribbean-blue);
+    background: var( --midnight-navy);
     color: white;
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(30, 58, 138, 0.2);
