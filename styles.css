@@ -1,15 +1,15 @@
 /* CSS Variables - SΞNSΞ TRΛVΞL ΛGΞNCY Color Palette */
 :root {
-    --caribbean-blue: #1E3A8A;      /* Deep luxury blue */
-    --ocean-sky: #3B82F6;           /* Vibrant Caribbean blue */
-    --tropical-cyan: #06B6D4;       /* Bright tropical accent */
+    --caribbean-blue: #44c0c5;      /* Larimar blue - our national stone */
+    --ocean-sky: #148c84;           /* Mangrove green */
+    --tropical-cyan: #0f6b5e;       /* Darker mangrove for depth */
     --coral-reef: #F59E0B;          /* Warm coral accent */
     --dominican-red: #DC2626;       /* Dominican flag red */
     --dominican-white: #FFFFFF;     /* Dominican flag white */
-    --seafoam-white: #F0F9FF;       /* Clean blue-tinted white */
+    --seafoam-white: #fbfaf7;       /* Seashell white for clean backgrounds */
     --midnight-navy: #1E293B;       /* Deep navy for text */
-    --azure-highlight: #60A5FA;     /* Light blue highlight */
-    --sapphire-deep: #1E40AF;       /* Deep sapphire for depth */
+    --azure-highlight: #44c0c5;     /* Larimar blue highlight */
+    --sapphire-deep: #148c84;       /* Mangrove green for depth */
     --larimar-blue: #44c0c5;        /* Larimar like our national stone */
     --mangrove-green: #148c84;      /* Mangrove green for secondary elements */
     --seashell-white: #fbfaf7;      /* Seashell White to give a more intense beach vibe */
@@ -79,16 +79,16 @@ p, li, .about-description, .safety-description {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     letter-spacing: 2px;
-    background: linear-gradient(135deg, var(--caribbean-blue) 0%, var(--ocean-sky) 50%, var(--tropical-cyan) 100%);
+    background: linear-gradient(135deg, var(--larimar-blue) 0%, var(--mangrove-green) 50%, var(--tropical-cyan) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 1px 2px rgba(30, 58, 138, 0.2));
+    filter: drop-shadow(0 1px 2px rgba(68, 192, 197, 0.2));
 }
 
 .section-subtitle {
     font-size: 1.1rem;
-    color: var(--caribbean-blue);
+    color: var(--larimar-blue);
     margin-bottom: 2rem;
     font-weight: 500;
 }
@@ -111,16 +111,16 @@ p, li, .about-description, .safety-description {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--ocean-sky), var(--caribbean-blue));
+    background: linear-gradient(135deg, var(--larimar-blue), var(--mangrove-green));
     color: white;
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+    box-shadow: 0 4px 15px rgba(68, 192, 197, 0.2);
     border: none;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
-    background: linear-gradient(135deg, var(--caribbean-blue), var(--larimar-blue));
+    box-shadow: 0 6px 20px rgba(68, 192, 197, 0.3);
+    background: linear-gradient(135deg, var(--mangrove-green), var(--tropical-cyan));
 }
 
 .btn-primary:active {
@@ -129,7 +129,7 @@ p, li, .about-description, .safety-description {
 
 .btn-secondary {
     background: rgba(255, 255, 255, 0.9);
-    color: var(--caribbean-blue);
+    color: var(--larimar-blue);
     border: 2px solid rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
@@ -137,7 +137,7 @@ p, li, .about-description, .safety-description {
 
 .btn-secondary:hover {
     background: rgba(255, 255, 255, 1);
-    color: var(--caribbean-blue);
+    color: var(--larimar-blue);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
     border-color: rgba(255, 255, 255, 1);
@@ -149,17 +149,17 @@ p, li, .about-description, .safety-description {
 
 .btn-outline {
     background: transparent;
-    color: var(--caribbean-blue);
-    border: 2px solid var(--caribbean-blue);
+    color: var(--larimar-blue);
+    border: 2px solid var(--larimar-blue);
     padding: 12px 24px;
     font-size: 1rem;
 }
 
 .btn-outline:hover {
-    background: var(--caribbean-blue);
+    background: var(--larimar-blue);
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(30, 58, 138, 0.3);
+    box-shadow: 0 8px 25px rgba(68, 192, 197, 0.3);
 }
 
 /* Navigation */
@@ -167,11 +167,13 @@ p, li, .about-description, .safety-description {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(240, 249, 255, 0.95);
-    backdrop-filter: blur(10px);
+    background: rgba(20, 140, 132, 0.95);
+    backdrop-filter: blur(15px);
     z-index: 1000;
     padding: 1rem 0;
     transition: var(--transition);
+    border-bottom: 2px solid rgba(68, 192, 197, 0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .nav-container {
@@ -199,15 +201,15 @@ p, li, .about-description, .safety-description {
     font-family: 'Inter', sans-serif;
     font-size: 2.2rem;
     font-weight: 900;
-    color: var(--caribbean-blue);
+    color: #D4A574;
     margin: 0;
     letter-spacing: 4px;
     text-transform: uppercase;
-    background: linear-gradient(135deg, var(--caribbean-blue) 0%, var(--ocean-sky) 50%, var(--tropical-cyan) 100%);
+    background: linear-gradient(135deg, #D4A574 0%, #E6C08C 50%, #F4D4A3 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 2px 4px rgba(30, 58, 138, 0.3));
+    filter: drop-shadow(0 2px 4px rgba(212, 165, 116, 0.3));
     transition: all 0.3s ease;
     text-decoration: none;
     border: none;
@@ -223,7 +225,7 @@ p, li, .about-description, .safety-description {
 
 .nav-menu a {
     text-decoration: none;
-    color: var(--midnight-navy);
+    color: var(--seashell-white);
     font-weight: 500;
     transition: var(--transition);
     position: relative;
@@ -237,12 +239,12 @@ p, li, .about-description, .safety-description {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--caribbean-blue), var(--ocean-sky));
+    background: linear-gradient(90deg, var(--larimar-blue), var(--mangrove-green));
     transition: width 0.3s ease;
 }
 
 .nav-menu a:hover {
-    color: var(--caribbean-blue);
+    color: var(--larimar-blue);
 }
 
 .nav-menu a:hover::after {
@@ -250,7 +252,7 @@ p, li, .about-description, .safety-description {
 }
 
 .cta-button {
-    background: var(--ocean-sky);
+    background: var(--larimar-blue);
     color: white !important;
     padding: 16px 32px;
     border-radius: var(--border-radius);
@@ -265,9 +267,9 @@ p, li, .about-description, .safety-description {
 }
 
 .cta-button:hover {
-    background: var(--caribbean-blue);
+    background: var(--mangrove-green);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3);
+    box-shadow: 0 6px 20px rgba(68, 192, 197, 0.3);
 }
 
 .hamburger {
@@ -1039,9 +1041,9 @@ p, li, .about-description, .safety-description {
 
 .category-btn {
     padding: 12px 24px;
-    border: 2px solid var(--caribbean-blue);
+    border: 2px solid var(--larimar-blue);
     background: transparent;
-    color: var(--caribbean-blue);
+    color: var(--larimar-blue);
     border-radius: var(--border-radius);
     cursor: pointer;
     transition: var(--transition);
@@ -1050,13 +1052,13 @@ p, li, .about-description, .safety-description {
 
 .category-btn.active,
 .category-btn:hover {
-    background: var(--caribbean-blue);
+    background: var(--larimar-blue);
     color: white;
 }
 
 .main-gallery {
     padding: 80px 0;
-    background: var(--seafoam-white);
+    background: var(--seashell-white);
 }
 
 .gallery-grid-large {
@@ -1179,7 +1181,7 @@ p, li, .about-description, .safety-description {
 
 .pillar-content {
     padding: 80px 0;
-    background: var(--seafoam-white);
+    background: var(--seashell-white);
     min-height: 600px;
     overflow: hidden;
 }
@@ -1216,7 +1218,7 @@ p, li, .about-description, .safety-description {
 
 .pillar-text h3 {
     font-size: 2.5rem;
-    color: var(--caribbean-blue);
+    color: var(--larimar-blue);
     margin-bottom: 2rem;
     font-weight: 700;
 }
@@ -1242,7 +1244,7 @@ p, li, .about-description, .safety-description {
 
 .feature i {
     font-size: 1.5rem;
-    color: var(--caribbean-blue);
+    color: var(--larimar-blue);
     margin-top: 0.25rem;
     min-width: 24px;
 }
@@ -1274,7 +1276,7 @@ p, li, .about-description, .safety-description {
 
 .pillars-cta {
     padding: 80px 0;
-    background: linear-gradient(135deg, var(--caribbean-blue), var(--sapphire-deep));
+    background: linear-gradient(135deg, var(--larimar-blue), var(--mangrove-green));
     color: white;
     text-align: center;
 }
@@ -1294,18 +1296,18 @@ p, li, .about-description, .safety-description {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: rgba(30, 58, 138, 0.3);
+    background: rgba(68, 192, 197, 0.3);
     cursor: pointer;
     transition: var(--transition);
 }
 
 .dot.active {
-    background: var(--caribbean-blue);
+    background: var(--larimar-blue);
     transform: scale(1.2);
 }
 
 .dot:hover {
-    background: var(--caribbean-blue);
+    background: var(--larimar-blue);
     transform: scale(1.1);
 }
 
@@ -1316,7 +1318,7 @@ p, li, .about-description, .safety-description {
     transform: translateY(-50%);
     background: transparent;
     border: none;
-    color: var(--caribbean-blue);
+    color: var(--larimar-blue);
     width: 50px;
     height: 50px;
     cursor: pointer;
@@ -1329,7 +1331,7 @@ p, li, .about-description, .safety-description {
 }
 
 .pillar-nav-btn:hover {
-    color: var(--sapphire-deep);
+    color: var(--mangrove-green);
     transform: translateY(-50%) scale(1.2);
 }
 
@@ -1391,7 +1393,7 @@ p, li, .about-description, .safety-description {
 /* Ambassador Section */
 .ambassador {
     padding: 100px 0;
-    background: linear-gradient(135deg, var(--seafoam-white), var(--azure-highlight));
+    background: linear-gradient(135deg, var(--seashell-white), var(--larimar-blue));
 }
 
 .ambassador-content {

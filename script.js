@@ -629,11 +629,11 @@ function initScrollAnimations() {
 window.addEventListener('scroll', function() {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(240, 249, 255, 0.98)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+        navbar.style.background = 'rgba(20, 140, 132, 0.98)';
+        navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.2)';
     } else {
-        navbar.style.background = 'rgba(240, 249, 255, 0.95)';
-        navbar.style.boxShadow = 'none';
+        navbar.style.background = 'rgba(20, 140, 132, 0.95)';
+        navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
     }
 });
 
@@ -707,7 +707,7 @@ style.textContent = `
             left: 0;
             right: 0;
             height: 100vh;
-            background: linear-gradient(135deg, rgba(240, 249, 255, 0.98), rgba(255, 255, 255, 0.95));
+            background: linear-gradient(135deg, rgba(20, 140, 132, 0.98), rgba(68, 192, 197, 0.95));
             backdrop-filter: blur(15px);
             padding: 6rem 2rem 2rem;
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
