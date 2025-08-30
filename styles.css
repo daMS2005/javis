@@ -74,6 +74,10 @@ p, li, .about-description, .safety-description {
     color: var(--midnight-navy);
 }
 
+.section-title.contact-title {
+    font-size: 2rem;
+}
+
 /* Special styling for SΞNSΞ branding */
 .brand-name {
     font-family: 'Inter', sans-serif;
@@ -170,7 +174,7 @@ p, li, .about-description, .safety-description {
     background: rgba(20, 140, 132, 0.95);
     backdrop-filter: blur(15px);
     z-index: 1000;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     transition: var(--transition);
     border-bottom: 2px solid rgba(68, 192, 197, 0.3);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
@@ -183,6 +187,7 @@ p, li, .about-description, .safety-description {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-height: 80px;
 }
 
 .nav-logo a {
@@ -197,23 +202,106 @@ p, li, .about-description, .safety-description {
     transform: scale(1.05);
 }
 
-.nav-logo h2 {
-    font-family: 'Inter', sans-serif;
-    font-size: 2.2rem;
-    font-weight: 900;
-    color: #D4A574;
-    margin: 0;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    background: linear-gradient(135deg, #D4A574 0%, #E6C08C 50%, #F4D4A3 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 2px 4px rgba(212, 165, 116, 0.3));
+.nav-logo .logo-image {
+    height: 35px;
+    width: auto;
     transition: all 0.3s ease;
-    text-decoration: none;
-    border: none;
-    outline: none;
+    filter: drop-shadow(0 2px 4px rgba(240, 249, 255, 0.3));
+}
+
+    .nav-logo .logo-image {
+        height: 30px;
+        width: auto;
+        transition: all 0.3s ease;
+        filter: drop-shadow(0 2px 4px rgba(240, 249, 255, 0.3));
+    }
+    
+    .brand-logo {
+        height: 2rem;
+        width: auto;
+        vertical-align: middle;
+        margin: 0 0.2rem;
+        display: inline-block;
+        filter: drop-shadow(0 2px 4px rgba(240, 249, 255, 0.3));
+        position: relative;
+        top: -0.1rem;
+    }
+    
+    .hero-logo {
+        height: 2.5rem;
+        width: auto;
+        vertical-align: middle;
+        margin-right: 0.5rem;
+        filter: drop-shadow(0 2px 4px rgba(240, 249, 255, 0.3));
+        position: relative;
+        top: -0.1rem;
+    }
+    
+    .footer-logo {
+        height: 0.8rem;
+        width: auto;
+        margin-bottom: 0.8rem;
+        filter: drop-shadow(0 2px 4px rgba(240, 249, 255, 0.3));
+        vertical-align: middle;
+        position: relative;
+        top: -0.1rem;
+    }
+    
+    .brand-logo {
+        height: 0.4rem;
+        width: auto;
+        vertical-align: middle;
+        margin: 0 0.1rem;
+        display: inline-block;
+        filter: drop-shadow(0 2px 4px rgba(240, 249, 255, 0.3));
+        position: relative;
+        top: -0.05rem;
+    }
+    
+    .hero-logo {
+        height: 0.8rem;
+        width: auto;
+        vertical-align: middle;
+        margin-right: 0.3rem;
+        filter: drop-shadow(0 2px 4px rgba(240, 249, 255, 0.3));
+        position: relative;
+        top: -0.05rem;
+    }
+
+.nav-logo .logo-image:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 4px 8px rgba(240, 249, 255, 0.4));
+}
+
+.brand-logo {
+    height: 2.5rem;
+    width: auto;
+    vertical-align: middle;
+    margin: 0 0.2rem;
+    display: inline-block;
+    filter: drop-shadow(0 2px 4px rgba(240, 249, 255, 0.3));
+    position: relative;
+    top: -0.1rem;
+}
+
+.footer-logo {
+    height: 2.5rem;
+    width: auto;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 2px 4px rgba(240, 249, 255, 0.3));
+    vertical-align: middle;
+    position: relative;
+    top: -0.1rem;
+}
+
+.hero-logo {
+    height: 3rem;
+    width: auto;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+    filter: drop-shadow(0 2px 4px rgba(240, 249, 255, 0.3));
+    position: relative;
+    top: -0.1rem;
 }
 
 .nav-menu {
@@ -225,7 +313,7 @@ p, li, .about-description, .safety-description {
 
 .nav-menu a {
     text-decoration: none;
-    color: var(--seashell-white);
+    color: var(--seafoam-white);
     font-weight: 500;
     transition: var(--transition);
     position: relative;
@@ -239,12 +327,13 @@ p, li, .about-description, .safety-description {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--larimar-blue), var(--mangrove-green));
+    background: var(--seafoam-white);
     transition: width 0.3s ease;
 }
 
 .nav-menu a:hover {
-    color: var(--larimar-blue);
+    color: var(--seafoam-white);
+    opacity: 0.8;
 }
 
 .nav-menu a:hover::after {
@@ -252,8 +341,8 @@ p, li, .about-description, .safety-description {
 }
 
 .cta-button {
-    background: var(--larimar-blue);
-    color: white !important;
+    background: transparent;
+    color: var(--seafoam-white) !important;
     padding: 16px 32px;
     border-radius: var(--border-radius);
     font-size: 1.2rem;
@@ -264,12 +353,21 @@ p, li, .about-description, .safety-description {
     justify-content: center;
     white-space: nowrap;
     min-width: 160px;
+    border: 2px solid var(--seafoam-white);
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+}
+
+.cta-button::after {
+    display: none !important;
 }
 
 .cta-button:hover {
-    background: var(--mangrove-green);
+    background: var(--seafoam-white);
+    color: var(--mangrove-green) !important;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(68, 192, 197, 0.3);
+    box-shadow: 0 6px 20px rgba(240, 249, 255, 0.3);
+    text-decoration: none;
 }
 
 .hamburger {
@@ -2749,6 +2847,38 @@ img.loaded {
 
 /* Responsive styles for ambassador page */
 @media (max-width: 768px) {
+    /* Mobile Logo Sizes */
+    .brand-logo {
+        height: 1.8rem;
+        width: auto;
+        vertical-align: middle;
+        margin: 0 0.1rem;
+        display: inline-block;
+        filter: drop-shadow(0 2px 4px rgba(240, 249, 255, 0.3));
+        position: relative;
+        top: -0.05rem;
+    }
+    
+    .hero-logo {
+        height: 2.2rem;
+        width: auto;
+        vertical-align: middle;
+        margin-right: 0.3rem;
+        filter: drop-shadow(0 2px 4px rgba(240, 249, 255, 0.3));
+        position: relative;
+        top: -0.05rem;
+    }
+    
+    .footer-logo {
+        height: 2rem;
+        width: auto;
+        margin-bottom: 0.8rem;
+        filter: drop-shadow(0 2px 4px rgba(240, 249, 255, 0.3));
+        vertical-align: middle;
+        position: relative;
+        top: -0.1rem;
+    }
+    
     .ambassador-hero .hero-title {
         font-size: 2.5rem;
     }
