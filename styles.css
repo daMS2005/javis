@@ -13,7 +13,8 @@
     --larimar-blue: #44c0c5;        /* Larimar like our national stone */
     --mangrove-green: #148c84;      /* Mangrove green for secondary elements */
     --seashell-white: #fae6d2;      /* Seashell White to give a more intense beach vibe */
-    
+    --dominican-blue: #002D62 
+        
     --font-serif: 'Playfair Display', serif;
     --font-sans: 'Inter', sans-serif;
     --font-logo: 'Playfair Display', serif;  /* Elegant font for logo */
@@ -595,7 +596,7 @@ p, li, .about-description, .safety-description {
     left: 0;
     right: 0;
     height: 4px;
-    background: var(--caribbean-blue);
+    background: var(--dominican-blue);
 }
 
 .pillar:nth-child(2)::before,
@@ -606,7 +607,7 @@ p, li, .about-description, .safety-description {
 .pillar:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 30px rgba(30, 58, 138, 0.1);
-    border-color: var(--caribbean-blue);
+    border-color: var(--dominican-blue);
 }
 
 .pillar:nth-child(2):hover,
@@ -617,13 +618,13 @@ p, li, .about-description, .safety-description {
 
 .pillar i {
     font-size: 2.5rem;
-    color: var(--caribbean-blue);
+    color: var(--dominican-blue);
     margin-bottom: 1rem;
     transition: var(--transition);
 }
 
 .pillar:nth-child(1) i {
-    color: var(--caribbean-blue);
+    color: var(--dominican-blue);
 }
 
 .pillar:nth-child(2) i {
@@ -635,7 +636,7 @@ p, li, .about-description, .safety-description {
 }
 
 .pillar:nth-child(4) i {
-    color: var(--caribbean-blue);
+    color: var(--dominican-blue);
 }
 
 .pillar:hover i {
