@@ -305,31 +305,29 @@ function initPillarSlider() {
         });
     });
 
-    if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-                if (currentSlide > 0) {
-                    currentSlide--;
-                } else {
-                    currentSlide = totalSlides - 1;
-                }
-                updatePillarSlider();
-                pauseAutoScroll();
-                setTimeout(resumeAutoScroll, 10000);
+  if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+            } else {
+                currentSlide = totalSlides - 1;
             }
+            updatePillarSlider();
+            pauseAutoScroll();
+            setTimeout(resumeAutoScroll, 10000);
         });
     }
 
     if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-                if (currentSlide < totalSlides - 1) {
-                    currentSlide++;
-                } else {
-                    currentSlide = 0;
-                }
-                updatePillarSlider();
-                pauseAutoScroll();
-                setTimeout(resumeAutoScroll, 10000);
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+            } else {
+                currentSlide = 0;
             }
+            updatePillarSlider();
+            pauseAutoScroll();
+            setTimeout(resumeAutoScroll, 10000);
         });
     }
 
@@ -399,8 +397,6 @@ function updatePillarSlider() {
 
     slider.style.transform = `translateX(${-currentSlide * 25}%)`;
     dots.forEach((dot, index) => dot.classList.toggle('active', index === currentSlide));
-    if (prevBtn) prevBtn.disabled = currentSlide === 0;
-    if (nextBtn) nextBtn.disabled = currentSlide === totalSlides - 1;
 }
 
 function handlePillarHash() {
