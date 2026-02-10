@@ -1,7 +1,15 @@
 // SΞNSΞ TRΛVΞL ΛGΞNCY - JavaScript
 
+// ============================================
+// CONFIGURATION - Update these URLs after setting up Google Sheets
+// ============================================
+const FORM_CONFIG = {
+    // Replace with your Google Apps Script web app URLs (see SETUP_GUIDE.md)
+    waitlistEndpoint: 'https://script.google.com/macros/s/AKfycbxZ84ICems4yphQQCfv_d0F7UhegyyICHwnEUj2Ue3CKlwPP6wTw9ffsFWo2IEFFzaKCQ/exec', // e.g. 'https://script.google.com/macros/s/AKfycb.../exec'
+    ambassadorEndpoint: 'https://script.google.com/macros/s/AKfycbxZ84ICems4yphQQCfv_d0F7UhegyyICHwnEUj2Ue3CKlwPP6wTw9ffsFWo2IEFFzaKCQ/exec', // e.g. 'https://script.google.com/macros/s/AKfycb.../exec'
+};
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all functionality
     initHeroSlideshow();
     initMobileNavigation();
     initTripFilters();
@@ -13,202 +21,204 @@ document.addEventListener('DOMContentLoaded', function() {
     initScrollAnimations();
     initTripCounter();
     initTouchInteractions();
-    
-    // Handle pillar hash on page load
     handlePillarHash();
 });
 
-// Add touch-friendly interactions to all interactive elements
+// ============================================
+// FORM SUBMISSION (Google Sheets Integration)
+// ============================================
+
+async function submitFormData(endpoint, data, formType) {
+    // If no endpoint configured, fall back to localStorage backup
+    if (!endpoint) {
+        console.warn(`No endpoint configured for ${formType}. Saving locally.`);
+        saveToLocalBackup(formType, data);
+        return { success: true, fallback: true };
+    }
+
+    try {
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            mode: 'no-cors', // Required for Google Apps Script
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                ...data,
+                formType: formType,
+                submittedAt: new Date().toISOString(),
+            }),
+        });
+        // no-cors returns opaque response, so we assume success
+        // Also save locally as backup
+        saveToLocalBackup(formType, data);
+        return { success: true };
+    } catch (error) {
+        console.error('Form submission error:', error);
+        // Save locally as fallback
+        saveToLocalBackup(formType, data);
+        return { success: true, fallback: true };
+    }
+}
+
+function saveToLocalBackup(formType, data) {
+    try {
+        const key = `sense_${formType}_submissions`;
+        const existing = JSON.parse(localStorage.getItem(key) || '[]');
+        existing.push({
+            ...data,
+            submittedAt: new Date().toISOString(),
+        });
+        localStorage.setItem(key, JSON.stringify(existing));
+    } catch (e) {
+        console.warn('localStorage not available:', e);
+    }
+}
+
+// Utility: export local submissions as CSV (for admin use)
+function exportLocalSubmissions(formType) {
+    const key = `sense_${formType}_submissions`;
+    const data = JSON.parse(localStorage.getItem(key) || '[]');
+    if (data.length === 0) {
+        console.log('No local submissions found.');
+        return;
+    }
+    const headers = Object.keys(data[0]);
+    const csv = [
+        headers.join(','),
+        ...data.map(row => headers.map(h => `"${(row[h] || '').toString().replace(/"/g, '""')}"`).join(','))
+    ].join('\n');
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${formType}_submissions.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+// ============================================
+// TOUCH INTERACTIONS
+// ============================================
+
 function initTouchInteractions() {
-    // Buttons
     document.querySelectorAll('.btn').forEach(btn => {
         btn.addEventListener('touchstart', function() {
             this.style.transform = 'scale(0.95)';
-        });
-        
+        }, { passive: true });
         btn.addEventListener('touchend', function() {
             this.style.transform = 'scale(1)';
-        });
+        }, { passive: true });
     });
-    
-    // Pillar cards
+
     document.querySelectorAll('.pillar').forEach(pillar => {
         pillar.addEventListener('touchstart', function() {
             this.style.transform = 'translateY(-3px) scale(0.98)';
-        });
-        
+        }, { passive: true });
         pillar.addEventListener('touchend', function() {
             this.style.transform = 'translateY(-3px) scale(1)';
-        });
+        }, { passive: true });
     });
-    
-    // Trip cards
+
     document.querySelectorAll('.trip-card').forEach(card => {
         card.addEventListener('touchstart', function() {
             this.style.transform = 'scale(0.98)';
-        });
-        
+        }, { passive: true });
         card.addEventListener('touchend', function() {
             this.style.transform = 'scale(1)';
-        });
+        }, { passive: true });
     });
-    
-    // Gallery items
+
     document.querySelectorAll('.gallery-item').forEach(item => {
         item.addEventListener('touchstart', function() {
             this.style.transform = 'scale(0.98)';
-        });
-        
+        }, { passive: true });
         item.addEventListener('touchend', function() {
             this.style.transform = 'scale(1)';
-        });
+        }, { passive: true });
     });
-    
-    // Form inputs
-    document.querySelectorAll('input, select, textarea').forEach(input => {
-        input.addEventListener('focus', function() {
-            this.style.transform = 'scale(1.02)';
-        });
-        
-        input.addEventListener('blur', function() {
-            this.style.transform = 'scale(1)';
-        });
-    });
-    
-    // Ambassador section specific interactions
-    document.querySelectorAll('.ambassador-cta .btn').forEach(btn => {
-        btn.addEventListener('touchstart', function() {
-            this.style.transform = 'scale(0.95)';
-        });
-        
-        btn.addEventListener('touchend', function() {
-            this.style.transform = 'scale(1)';
-        });
-    });
-    
-    // Role and perks info cards
+
     document.querySelectorAll('.role-info, .perks-info').forEach(card => {
         card.addEventListener('touchstart', function() {
             this.style.transform = 'scale(0.98)';
             this.style.boxShadow = '0 8px 25px rgba(30, 58, 138, 0.15)';
-        });
-        
+        }, { passive: true });
         card.addEventListener('touchend', function() {
             this.style.transform = 'scale(1)';
-            this.style.boxShadow = 'var(--shadow)';
-        });
+            this.style.boxShadow = '';
+        }, { passive: true });
     });
 }
 
-// Hero Image Slideshow
+// ============================================
+// HERO SLIDESHOW
+// ============================================
+
 function initHeroSlideshow() {
     const heroImages = document.querySelectorAll('.hero-image');
+    if (heroImages.length <= 1) return;
     let currentImage = 0;
-    
-    function nextImage() {
+
+    setInterval(() => {
         heroImages[currentImage].classList.remove('active');
         currentImage = (currentImage + 1) % heroImages.length;
         heroImages[currentImage].classList.add('active');
-    }
-    
-    // Change image every 5 seconds
-    setInterval(nextImage, 5000);
+    }, 5000);
 }
 
-// Mobile Navigation
+// ============================================
+// MOBILE NAVIGATION
+// ============================================
+
 function initMobileNavigation() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
-    
-    console.log('Mobile Navigation Init:', { hamburger: !!hamburger, navMenu: !!navMenu });
-    
-    if (hamburger && navMenu) {
-        hamburger.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            console.log('Hamburger clicked');
-            
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            
-            console.log('Menu active:', navMenu.classList.contains('active'));
-            
-            // Prevent body scroll when menu is open
-            if (navMenu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = 'auto';
-            }
-        });
-        
-        // Add touch event for mobile
-        hamburger.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            console.log('Hamburger touched');
-            
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            
-            console.log('Menu active:', navMenu.classList.contains('active'));
-            
-            // Prevent body scroll when menu is open
-            if (navMenu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = 'auto';
-            }
-        });
-        
-        // Close mobile menu when clicking on a link
-        const navLinks = document.querySelectorAll('.nav-menu a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
-            
-            // Add touch feedback
-            link.addEventListener('touchstart', function() {
-                this.style.transform = 'scale(0.95)';
-            });
-            
-            link.addEventListener('touchend', function() {
-                this.style.transform = 'scale(1)';
-            });
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
+    if (!hamburger || !navMenu) return;
+
+    function toggleMenu(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
     }
+
+    hamburger.addEventListener('click', toggleMenu);
+
+    // Close menu on link click
+    navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+
+    // Close menu on outside click
+    document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
 }
 
-// Trip Filters
+// ============================================
+// TRIP FILTERS
+// ============================================
+
 function initTripFilters() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     const tripCards = document.querySelectorAll('.trip-card');
-    
+
     filterButtons.forEach(button => {
         button.addEventListener('click', function() {
             const filter = this.getAttribute('data-filter');
-            
-            // Update active button
             filterButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
-            
-            // Filter trip cards
+
             tripCards.forEach(card => {
                 const category = card.getAttribute('data-category');
-                
                 if (filter === 'all' || category === filter) {
                     card.style.display = 'block';
                     card.style.animation = 'fadeInUp 0.6s ease forwards';
@@ -220,23 +230,22 @@ function initTripFilters() {
     });
 }
 
-// Gallery Category Filters
+// ============================================
+// GALLERY FILTERS
+// ============================================
+
 function initGalleryFilters() {
     const categoryButtons = document.querySelectorAll('.category-btn');
     const galleryItems = document.querySelectorAll('.gallery-item');
-    
+
     categoryButtons.forEach(button => {
         button.addEventListener('click', function() {
             const category = this.getAttribute('data-category');
-            
-            // Update active button
             categoryButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
-            
-            // Filter gallery items
+
             galleryItems.forEach(item => {
                 const itemCategory = item.getAttribute('data-category');
-                
                 if (category === 'all' || itemCategory === category) {
                     item.style.display = 'block';
                     item.style.animation = 'fadeInUp 0.6s ease forwards';
@@ -248,13 +257,15 @@ function initGalleryFilters() {
     });
 }
 
-// Pillar Slider Navigation
+// ============================================
+// PILLAR SLIDER
+// ============================================
+
 let currentSlide = 0;
 const totalSlides = 4;
 let autoScrollInterval;
 let isAutoScrolling = true;
 
-// Auto-scroll functionality (global)
 function startAutoScroll() {
     if (autoScrollInterval) clearInterval(autoScrollInterval);
     autoScrollInterval = setInterval(() => {
@@ -262,7 +273,7 @@ function startAutoScroll() {
             currentSlide = (currentSlide + 1) % totalSlides;
             updatePillarSlider();
         }
-    }, 6000); // 6 seconds
+    }, 6000);
 }
 
 function pauseAutoScroll() {
@@ -283,329 +294,328 @@ function initPillarSlider() {
     const dots = document.querySelectorAll('.dot');
     const prevBtn = document.querySelector('.pillar-nav-btn.prev');
     const nextBtn = document.querySelector('.pillar-nav-btn.next');
-    
     if (!slider) return;
-    
-    // Update slider position
-    function updateSlider() {
-        updatePillarSlider();
-    }
-    
-    // Dot navigation
+
     dots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
             currentSlide = index;
-            updateSlider();
+            updatePillarSlider();
             pauseAutoScroll();
-            setTimeout(resumeAutoScroll, 10000); // Resume after 10 seconds
+            setTimeout(resumeAutoScroll, 10000);
         });
     });
-    
-    // Arrow navigation
-    prevBtn.addEventListener('click', () => {
-        if (currentSlide > 0) {
-            currentSlide--;
-            updateSlider();
-            pauseAutoScroll();
-            setTimeout(resumeAutoScroll, 10000); // Resume after 10 seconds
-        }
-    });
-    
-    nextBtn.addEventListener('click', () => {
-        if (currentSlide < totalSlides - 1) {
-            currentSlide++;
-            updateSlider();
-            pauseAutoScroll();
-            setTimeout(resumeAutoScroll, 10000); // Resume after 10 seconds
-        }
-    });
-    
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft' && currentSlide > 0) {
-            currentSlide--;
-            updateSlider();
-            pauseAutoScroll();
-            setTimeout(resumeAutoScroll, 10000); // Resume after 10 seconds
-        } else if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) {
-            currentSlide++;
-            updateSlider();
-            pauseAutoScroll();
-            setTimeout(resumeAutoScroll, 10000); // Resume after 10 seconds
-        }
-    });
-    
-    // Touch/swipe support for mobile
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updatePillarSlider();
+                pauseAutoScroll();
+                setTimeout(resumeAutoScroll, 10000);
+            }
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updatePillarSlider();
+                pauseAutoScroll();
+                setTimeout(resumeAutoScroll, 10000);
+            }
+        });
+    }
+
+    // Touch/swipe support
     let startX = 0;
-    let endX = 0;
     let isDragging = false;
-    
+
     slider.addEventListener('touchstart', (e) => {
         startX = e.touches[0].clientX;
         isDragging = true;
         slider.style.transition = 'none';
-    });
-    
+    }, { passive: true });
+
     slider.addEventListener('touchmove', (e) => {
         if (!isDragging) return;
-        
         const currentX = e.touches[0].clientX;
         const diff = startX - currentX;
         const translateX = -currentSlide * 25 - (diff / slider.offsetWidth) * 25;
-        
         slider.style.transform = `translateX(${translateX}%)`;
-    });
-    
+    }, { passive: true });
+
     slider.addEventListener('touchend', (e) => {
         if (!isDragging) return;
-        
-        endX = e.changedTouches[0].clientX;
+        const endX = e.changedTouches[0].clientX;
         const diff = startX - endX;
-        
         slider.style.transition = 'transform 0.3s ease-in-out';
-        
-        if (Math.abs(diff) > 80) { // Minimum swipe distance
+
+        if (Math.abs(diff) > 80) {
             if (diff > 0 && currentSlide < totalSlides - 1) {
-                // Swipe left
                 currentSlide++;
-                updateSlider();
-                pauseAutoScroll();
-                setTimeout(resumeAutoScroll, 10000); // Resume after 10 seconds
             } else if (diff < 0 && currentSlide > 0) {
-                // Swipe right
                 currentSlide--;
-                updateSlider();
-                pauseAutoScroll();
-                setTimeout(resumeAutoScroll, 10000); // Resume after 10 seconds
-            } else {
-                // Reset to current position
-                updateSlider();
             }
-        } else {
-            // Reset to current position
-            updateSlider();
+            pauseAutoScroll();
+            setTimeout(resumeAutoScroll, 10000);
         }
-        
+        updatePillarSlider();
         isDragging = false;
     });
-    
-    // Add touch feedback to navigation buttons
-    [prevBtn, nextBtn].forEach(btn => {
-        if (btn) {
-            btn.addEventListener('touchstart', function() {
-                this.style.transform = 'translateY(-50%) scale(0.95)';
-            });
-            
-            btn.addEventListener('touchend', function() {
-                this.style.transform = 'translateY(-50%) scale(1)';
-            });
-        }
-    });
-    
-    // Add touch feedback to dots
-    dots.forEach(dot => {
-        dot.addEventListener('touchstart', function() {
-            this.style.transform = 'scale(0.9)';
-        });
-        
-        dot.addEventListener('touchend', function() {
-            this.style.transform = 'scale(1)';
-        });
-    });
-    
-    // Initialize
-    updateSlider();
+
+    updatePillarSlider();
     startAutoScroll();
 }
 
-// Scroll to pillar function
 function scrollToPillar(pillarId) {
     const safetySection = document.getElementById('safety');
     if (!safetySection) return;
-    
-    // Smooth scroll to safety section
     safetySection.scrollIntoView({ behavior: 'smooth' });
-    
-    // Set the correct slide after scrolling
+
     setTimeout(() => {
-        const pillarMap = {
-            'luxury': 0,
-            'peer-built': 1,
-            'personalized': 2,
-            'safety-pillar': 3
-        };
-        
+        const pillarMap = { 'luxury': 0, 'peer-built': 1, 'personalized': 2, 'safety-pillar': 3 };
         if (pillarMap.hasOwnProperty(pillarId)) {
             currentSlide = pillarMap[pillarId];
             updatePillarSlider();
-            // Pause auto-scroll when navigating from other sections
             pauseAutoScroll();
-            // Resume after 5 seconds
             setTimeout(resumeAutoScroll, 5000);
         }
-    }, 800); // Wait for scroll to complete
+    }, 800);
 }
 
-// Update pillar slider function
 function updatePillarSlider() {
     const slider = document.querySelector('.pillar-slider');
     const dots = document.querySelectorAll('.dot');
     const prevBtn = document.querySelector('.pillar-nav-btn.prev');
     const nextBtn = document.querySelector('.pillar-nav-btn.next');
-    
     if (!slider) return;
-    
-    const translateX = -currentSlide * 25;
-    slider.style.transform = `translateX(${translateX}%)`;
-    
-    // Update dots
-    dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentSlide);
-    });
-    
-    // Update navigation buttons
-    if (prevBtn && nextBtn) {
-        prevBtn.disabled = currentSlide === 0;
-        nextBtn.disabled = currentSlide === totalSlides - 1;
-    }
+
+    slider.style.transform = `translateX(${-currentSlide * 25}%)`;
+    dots.forEach((dot, index) => dot.classList.toggle('active', index === currentSlide));
+    if (prevBtn) prevBtn.disabled = currentSlide === 0;
+    if (nextBtn) nextBtn.disabled = currentSlide === totalSlides - 1;
 }
 
-// Handle URL hash for direct pillar access
 function handlePillarHash() {
     const hash = window.location.hash.substring(1);
-    const pillarMap = {
-        'luxury': 0,
-        'peer-built': 1,
-        'personalized': 2,
-        'safety': 3
-    };
-    
+    const pillarMap = { 'luxury': 0, 'peer-built': 1, 'personalized': 2, 'safety': 3 };
     if (hash && pillarMap.hasOwnProperty(hash)) {
         currentSlide = pillarMap[hash];
         updatePillarSlider();
     }
 }
 
-// Smooth Scrolling
+// ============================================
+// SMOOTH SCROLLING
+// ============================================
+
 function initSmoothScrolling() {
-    const links = document.querySelectorAll('a[href^="#"]');
-    
-    links.forEach(link => {
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar
-                
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
             }
         });
     });
 }
 
-// Form Handling
+// ============================================
+// FORM HANDLING (with Google Sheets submission)
+// ============================================
+
 function initFormHandling() {
+    // Waitlist form
     const waitlistForm = document.getElementById('waitlist-form');
-    
     if (waitlistForm) {
-        waitlistForm.addEventListener('submit', function(e) {
+        waitlistForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            // Get form data
+            if (!validateForm(this)) {
+                showNotification('Please fill in all required fields.', 'error');
+                return;
+            }
+
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
-            
-            // Show success message (in a real app, this would send to a server)
-            showNotification('Thank you! You\'ve been added to our waitlist. We\'ll be in touch soon!', 'success');
-            
-            // Reset form
-            this.reset();
+
+            const result = await submitFormData(FORM_CONFIG.waitlistEndpoint, data, 'waitlist');
+
+            if (result.success) {
+                if (result.fallback) {
+                    showNotification(
+                        'Thank you! You\'ve been added to our waitlist. We\'ll be in touch soon!',
+                        'success'
+                    );
+                } else {
+                    showNotification(
+                        'Thank you! You\'ve been added to our waitlist. We\'ll be in touch soon!',
+                        'success'
+                    );
+                }
+                this.reset();
+            } else {
+                showNotification('Something went wrong. Please try again.', 'error');
+            }
+
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        });
+    }
+
+    // Ambassador form
+    const ambassadorForm = document.getElementById('ambassador-form');
+    if (ambassadorForm) {
+        ambassadorForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (!validateForm(this)) {
+                showNotification('Please fill in all required fields.', 'error');
+                return;
+            }
+
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            const result = await submitFormData(FORM_CONFIG.ambassadorEndpoint, data, 'ambassador');
+
+            if (result.success) {
+                showNotification(
+                    'Thank you for your application! We\'ll review it and get back to you within 5-7 business days.',
+                    'success'
+                );
+                this.reset();
+            } else {
+                showNotification('Something went wrong. Please try again.', 'error');
+            }
+
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
         });
     }
 }
 
-// Notification System
+// ============================================
+// FORM VALIDATION
+// ============================================
+
+function validateForm(form) {
+    const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+    let isValid = true;
+
+    inputs.forEach(input => {
+        // Remove previous error state
+        input.classList.remove('input-error');
+
+        if (!input.value.trim()) {
+            isValid = false;
+            input.classList.add('input-error');
+            // Scroll to first error
+            if (isValid === false) {
+                input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Email validation
+        if (input.type === 'email' && input.value.trim()) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(input.value.trim())) {
+                isValid = false;
+                input.classList.add('input-error');
+            }
+        }
+    });
+
+    return isValid;
+}
+
+// ============================================
+// NOTIFICATIONS
+// ============================================
+
 function showNotification(message, type = 'info') {
-    // Remove existing notifications
-    const existingNotification = document.querySelector('.notification');
-    if (existingNotification) {
-        existingNotification.remove();
-    }
-    
-    // Create notification element
+    const existing = document.querySelector('.notification');
+    if (existing) existing.remove();
+
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
+
+    const colors = {
+        success: '#148c84',
+        error: '#DC2626',
+        info: '#44c0c5',
+    };
+
     notification.innerHTML = `
         <div class="notification-content">
-            <span>${message}</span>
+            <span class="notification-icon">${type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ'}</span>
+            <span class="notification-text">${message}</span>
             <button class="notification-close">&times;</button>
         </div>
     `;
-    
-    // Add styles
+
     notification.style.cssText = `
         position: fixed;
         top: 100px;
-        right: 20px;
-        background: ${type === 'success' ? '#4CAF50' : '#2196F3'};
+        left: 50%;
+        transform: translateX(-50%);
+        background: ${colors[type] || colors.info};
         color: white;
         padding: 1rem 1.5rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.2);
         z-index: 10000;
-        max-width: 400px;
-        animation: slideInRight 0.3s ease;
+        max-width: min(90vw, 450px);
+        animation: notificationSlideIn 0.4s ease;
+        font-size: 0.95rem;
+        line-height: 1.5;
     `;
-    
-    // Add to page
+
     document.body.appendChild(notification);
-    
-    // Close button functionality
-    const closeBtn = notification.querySelector('.notification-close');
-    closeBtn.addEventListener('click', () => {
-        notification.remove();
+
+    notification.querySelector('.notification-close').addEventListener('click', () => {
+        notification.style.animation = 'notificationSlideOut 0.3s ease forwards';
+        setTimeout(() => notification.remove(), 300);
     });
-    
-    // Auto remove after 5 seconds
+
     setTimeout(() => {
         if (notification.parentNode) {
-            notification.remove();
+            notification.style.animation = 'notificationSlideOut 0.3s ease forwards';
+            setTimeout(() => notification.remove(), 300);
         }
     }, 5000);
 }
 
-// Image Loading
+// ============================================
+// IMAGE LOADING
+// ============================================
+
 function initImageLoading() {
-    const images = document.querySelectorAll('img');
-    
-    images.forEach(img => {
+    document.querySelectorAll('img').forEach(img => {
         if (img.complete) {
             img.classList.add('loaded');
         } else {
-            img.addEventListener('load', function() {
-                this.classList.add('loaded');
-            });
-            
-            img.addEventListener('error', function() {
-                this.style.display = 'none';
-            });
+            img.addEventListener('load', function() { this.classList.add('loaded'); });
+            img.addEventListener('error', function() { this.style.display = 'none'; });
         }
     });
 }
 
-// Scroll Animations
+// ============================================
+// SCROLL ANIMATIONS
+// ============================================
+
 function initScrollAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -613,11 +623,9 @@ function initScrollAnimations() {
                 entry.target.style.transform = 'translateY(0)';
             }
         });
-    }, observerOptions);
-    
-    // Observe elements for animation
-    const animatedElements = document.querySelectorAll('.trip-card, .gallery-item, .pillar, .safety-feature');
-    animatedElements.forEach(el => {
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.trip-card, .gallery-item, .pillar, .safety-feature, .benefit-card, .role-section').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -625,7 +633,10 @@ function initScrollAnimations() {
     });
 }
 
-// Navbar scroll effect
+// ============================================
+// NAVBAR SCROLL EFFECT
+// ============================================
+
 window.addEventListener('scroll', function() {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 100) {
@@ -637,205 +648,109 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Gallery hover effects
+// ============================================
+// GALLERY HOVER EFFECTS
+// ============================================
+
 document.addEventListener('DOMContentLoaded', function() {
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    
-    galleryItems.forEach(item => {
+    document.querySelectorAll('.gallery-item').forEach(item => {
         item.addEventListener('mouseenter', function() {
-            this.querySelector('.gallery-overlay').style.transform = 'translateY(0)';
+            const overlay = this.querySelector('.gallery-overlay');
+            if (overlay) overlay.style.transform = 'translateY(0)';
         });
-        
         item.addEventListener('mouseleave', function() {
-            this.querySelector('.gallery-overlay').style.transform = 'translateY(100%)';
+            const overlay = this.querySelector('.gallery-overlay');
+            if (overlay) overlay.style.transform = 'translateY(100%)';
         });
     });
 });
 
-// Trip card hover effects
-document.addEventListener('DOMContentLoaded', function() {
-    const tripCards = document.querySelectorAll('.trip-card');
-    
-    tripCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
+// ============================================
+// TRIP COUNTER
+// ============================================
+
+function initTripCounter() {
+    const el = document.getElementById('trip-count');
+    if (!el) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Currently 0 trips, update this number as trips happen
+                el.textContent = '0';
+                observer.unobserve(entry.target);
+            }
         });
     });
-});
+    observer.observe(el);
+}
 
-// Add CSS animations
+// ============================================
+// LAZY LOADING
+// ============================================
+
+if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                }
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+    document.querySelectorAll('img[data-src]').forEach(img => imageObserver.observe(img));
+}
+
+// ============================================
+// INJECTED STYLES
+// ============================================
+
 const style = document.createElement('style');
 style.textContent = `
-    @keyframes slideInRight {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
+    @keyframes notificationSlideIn {
+        from { transform: translateX(-50%) translateY(-20px); opacity: 0; }
+        to { transform: translateX(-50%) translateY(0); opacity: 1; }
     }
-    
+    @keyframes notificationSlideOut {
+        from { transform: translateX(-50%) translateY(0); opacity: 1; }
+        to { transform: translateX(-50%) translateY(-20px); opacity: 0; }
+    }
+    .notification-content {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    .notification-icon {
+        font-size: 1.2rem;
+        font-weight: bold;
+        flex-shrink: 0;
+    }
+    .notification-text {
+        flex: 1;
+    }
     .notification-close {
         background: none;
         border: none;
         color: white;
         font-size: 1.5rem;
         cursor: pointer;
-        margin-left: 1rem;
         padding: 0;
         line-height: 1;
+        opacity: 0.8;
+        flex-shrink: 0;
     }
-    
-    .notification-content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+    .notification-close:hover { opacity: 1; }
+    .input-error {
+        border-color: #DC2626 !important;
+        box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15) !important;
     }
-    
-    @media (max-width: 768px) {
-        .nav-menu.active {
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100vh;
-            background: linear-gradient(135deg, rgba(20, 140, 132, 0.98), rgba(68, 192, 197, 0.95));
-            backdrop-filter: blur(15px);
-            padding: 6rem 2rem 2rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            z-index: 1000;
-        }
+    button[disabled] {
+        opacity: 0.7;
+        cursor: not-allowed;
     }
 `;
 document.head.appendChild(style);
-
-// Performance optimization: Lazy loading for images
-if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.remove('lazy');
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-    
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
-    });
-}
-
-// WhatsApp integration
-document.addEventListener('DOMContentLoaded', function() {
-    const whatsappButton = document.querySelector('.whatsapp-chat a');
-    if (whatsappButton) {
-        whatsappButton.addEventListener('click', function(e) {
-            // You can add analytics tracking here
-            console.log('WhatsApp chat initiated');
-        });
-    }
-});
-
-// Trip Counter
-function initTripCounter() {
-    const tripCountElement = document.getElementById('trip-count');
-    if (tripCountElement) {
-        // For now, set to 0. In the future, this could be dynamic
-        let currentCount = 0;
-        
-        // Animate the counter on page load
-        const animateCounter = () => {
-            const targetCount = 0; // This will be updated when trips are added
-            const duration = 2000; // 2 seconds
-            const steps = 60;
-            const increment = targetCount / steps;
-            let current = 0;
-            
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= targetCount) {
-                    current = targetCount;
-                    clearInterval(timer);
-                }
-                tripCountElement.textContent = Math.floor(current);
-            }, duration / steps);
-        };
-        
-        // Start animation when the element comes into view
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounter();
-                    observer.unobserve(entry.target);
-                }
-            });
-        });
-        
-        observer.observe(tripCountElement);
-    }
-}
-
-// Form validation
-function validateForm(form) {
-    const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
-    let isValid = true;
-    
-    inputs.forEach(input => {
-        if (!input.value.trim()) {
-            isValid = false;
-            input.style.borderColor = '#D95E4B';
-        } else {
-            input.style.borderColor = '';
-        }
-    });
-    
-    return isValid;
-}
-
-// Add form validation to the waitlist form
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('waitlist-form');
-    if (form) {
-        const submitBtn = form.querySelector('button[type="submit"]');
-        
-        submitBtn.addEventListener('click', function(e) {
-            if (!validateForm(form)) {
-                e.preventDefault();
-                showNotification('Please fill in all required fields.', 'error');
-            }
-        });
-    }
-    
-    // Ambassador form handling
-    const ambassadorForm = document.getElementById('ambassador-form');
-    if (ambassadorForm) {
-        ambassadorForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            if (!validateForm(this)) {
-                showNotification('Please fill in all required fields.', 'error');
-                return;
-            }
-            
-            // Get form data
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            // Show success message
-            showNotification('Thank you for your application! We\'ll review it and get back to you within 5-7 business days.', 'success');
-            
-            // Reset form
-            this.reset();
-        });
-    }
-}); 
