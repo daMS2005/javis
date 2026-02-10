@@ -607,7 +607,7 @@ p, li, .about-description, .safety-description {
 .pillar:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 30px rgba(30, 58, 138, 0.1);
-    border-color: var(--dominican-blue);
+    border-color: var(--larimar-blue);
 }
 
 .pillar:nth-child(2):hover,
