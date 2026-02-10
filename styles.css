@@ -599,7 +599,7 @@ p, li, .about-description, .safety-description {
     pointer-events: none;
 }
 
-:before {
+.pillar::before {
     content: '';
     position: absolute;
     top: 0;
