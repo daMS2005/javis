@@ -564,7 +564,7 @@ p, li, .about-description, .safety-description {
     background: white;
     border-radius: var(--border-radius);
     transition: var(--transition);
-    border: 2px solid var(--caribbean-blue);
+    border: 2px solid var(--dominican-blue);
     position: relative;
     overflow: hidden;
     cursor: pointer;
