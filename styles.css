@@ -570,6 +570,16 @@ p, li, .about-description, .safety-description {
     cursor: pointer;
 }
 
+.pillar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--dominican-blue);
+}
+
 .pillar:nth-child(2),
 .pillar:nth-child(3) {
     border-color: var(--dominican-red);
@@ -589,7 +599,7 @@ p, li, .about-description, .safety-description {
     pointer-events: none;
 }
 
-.pillar::before {
+:before {
     content: '';
     position: absolute;
     top: 0;
@@ -2409,8 +2419,8 @@ p, li, .about-description, .safety-description {
     }
     
     .brand-pillars {
-        grid-template-columns: 1fr;
-        gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
     }
     
     .pillar {
