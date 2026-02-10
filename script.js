@@ -306,9 +306,12 @@ function initPillarSlider() {
     });
 
     if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            if (currentSlide > 0) {
-                currentSlide--;
+    prevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                } else {
+                    currentSlide = totalSlides - 1;
+                }
                 updatePillarSlider();
                 pauseAutoScroll();
                 setTimeout(resumeAutoScroll, 10000);
@@ -317,9 +320,12 @@ function initPillarSlider() {
     }
 
     if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            if (currentSlide < totalSlides - 1) {
-                currentSlide++;
+    nextBtn.addEventListener('click', () => {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                } else {
+                    currentSlide = 0;
+                }
                 updatePillarSlider();
                 pauseAutoScroll();
                 setTimeout(resumeAutoScroll, 10000);
