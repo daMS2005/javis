@@ -754,3 +754,34 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+
+
+// Highlight contact section and WhatsApp when navigating to contact
+function highlightContact() {
+    const contactSection = document.getElementById('contact');
+    const whatsappBtn = document.querySelector('.whatsapp-chat');
+    
+    if (contactSection) {
+        contactSection.style.transition = 'box-shadow 0.3s ease';
+        contactSection.style.boxShadow = '0 0 0 4px var(--larimar-blue)';
+        setTimeout(() => {
+            contactSection.style.boxShadow = 'none';
+        }, 2000);
+    }
+    
+    if (whatsappBtn) {
+        whatsappBtn.classList.add('pulse');
+        setTimeout(() => {
+            whatsappBtn.classList.remove('pulse');
+        }, 3000);
+    }
+}
+
+// Listen for clicks on links that go to #contact
+document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href="#contact"]');
+    if (link) {
+        setTimeout(highlightContact, 800);
+    }
+});
