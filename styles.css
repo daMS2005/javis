@@ -955,7 +955,7 @@ p, li, .about-description, .safety-description {
 .day-item {
     margin-bottom: 1.5rem;
     padding: 1rem;
-    background: seashell-white;
+    background: --seafoam-white;
     border-radius: var(--border-radius);
     border-left: 3px solid var(--ocean-sky);
 }
